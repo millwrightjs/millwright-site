@@ -12,6 +12,14 @@ a:visited {
   color: #000;
 }
 
+pre {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1200px;
@@ -74,6 +82,7 @@ code,
 .code-block {
   padding: 24px 40px;
   margin: 40px auto 0;
+  line-height: 1.4;
 }
 
 .project-status {
@@ -100,9 +109,17 @@ code,
 }
 
 .docs {
-  margin-top: 160px;
+  margin-top: 200px;
+
+  & h2 {
+    margin-top: 120px;
+  }
 
   & h3 {
+    margin-top: 60px;
+  }
+
+  & h4 {
     margin-top: 60px;
   }
 

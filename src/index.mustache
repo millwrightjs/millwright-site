@@ -82,13 +82,61 @@
     </p>
     <h2>Usage</h2>
     <p>
-      Millwright's zero configuration approach means that projects have to follow some structural
-      guidelines to take advantage of it's features. We'll use some commented example code to walk
-      through these details.
+      Because of Millwright's zero configuration approach, usage documentation is less concerned
+      with how to setup and run the tool, and is instead focused on how your project can take
+      advantage of what Millwright does automatically.
     </p>
     <h3>Project structure</h3>
     <p>
-      A project that uses Millwright doesn't <em>need</em> to have anything except a 
+      To use Millwright, your project will need to follow a few structural guidelines. The goal here
+      was to require a basic structure inspired by standard practice in the community, nothing
+      Millwright-specific that would tie your project to a tool.
+    </p>
+    <p>
+      A project that uses Millwright doesn't <em>need</em> to have anything except a
+      <code>src</code> directory.  With just that, Millwright would copy everything to a
+      <code>dest</code> directory, compiling any mustache templates along the way. But we probably
+      want to do more than that. We'll use some commented example code to walk through how this
+      structure looks and works.
+    </p>
+    <p>
+      Let's look at a very basic example structure:
+    </p>
+    <div class="code-block">
+<pre>
+package.json
+node_modules
+src
+ ├─ index.json
+ └─ index.mustache
+</pre>
+    </div>
+    <h4>index.json</h4>
+    <div class="code-block">
+<pre>
+{
+  "pageTitle": "Home",
+  "assets": {
+    "styles": ["styles.sass"]
+  }
+}
+</pre>
+    </div>
+    <h4>index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<head>
+  <title>Example Website{[{# pageTitle}]}| {[{.}]}{[{/ pageTitle}]}</title>
+
+  {[{# assets.styles}]}
+    <link href="{[{.}]}" rel="stylesheet">
+  {[{/ assets.styles}]}
+</head>
+{[{/lambdas.escape}]}
+</pre>
+
+    </div>
   </section>
   <footer class="container">
     <p>&copy; 2016-2017 Shawn Erquhart. Released under the MIT license.</p>
