@@ -10,7 +10,7 @@
 
 <body>
   <section class="project-status">
-    <div class="container">
+    <div class="container container-wide">
       <p>
         <strong>Millwright.js is currently in alpha.</strong>
         It is expected to work as described, but needs quite a lot of testing. Please use Millwright
@@ -25,11 +25,70 @@
     <a class="header-link" href="https://www.npmjs.com/package/millwright">npm</a>
   </header>
   <section class="container">
-    <div class="code">
+    <div class="code-block header-code-block">
       <p>cd &lt;your-project-name&gt;</p>
       <p>npm install millwright-cli -g</p>
       <p>npm install millwright --save-dev</p>
     </div>
+  </section>
+  <section class="container project-description">
+    <h1>Stop configuring your build tool and start writing code.</h1>
+    <p>
+      Millwright's big idea is simple: building code (transforming authored code into production
+      ready code) shouldn't be something that we have to think about.
+    </p>
+    <p>
+      <strong>We're starting with static site generation.</strong> It transpiles pre-processor and
+      future syntax code. It does sourcemaps. It serves your project locally with file watching and
+      auto-inject/reload. It produces optimized builds. All without writing any configuration code.
+    </p>
+    <p>Keep scrolling to get started!</p>
+  </section>
+  <section class="container docs">
+    <h2>Getting started</h2>
+    <p>
+      This guide assumes that you know how to install and save npm packages to your project. If
+      that's not you, we recommend checking out
+      <a href="https://docs.npmjs.com/getting-started/what-is-npm">their docs</a>
+      to get going.
+    </p>
+    <h3>Installation</h3>
+    <p>
+      Millwright requires two packages - a global package, which allows you to use the
+      <code>mill</code> command, and a local package, which is installed per-project.
+    </p>
+    <p>
+      To install the global package, run <code>npm install millwright-cli -g</code>.
+      Then, from inside your project directory, install the local package by running
+      <code>npm install millwright --save-dev</code>.
+    </p>
+    <h3>Commands</h3>
+    <p>
+      Millwright currently utilizes a handful of commands centered around static site generation:
+    </p>
+    <p>
+      <code>mill make</code> - generates a development build with no optimization
+    </p>
+    <p>
+      <code>mill build</code> - generates an optimized build for production use
+    </p>
+    <p>
+      <code>mill dev</code> - same as <code>mill make</code>, but serves
+      locally and watches for changes.
+    </p>
+    <p>
+      <code>mill preview</code> - same as <code>mill build</code>, but
+      serves locally. Does not watch for changes.
+    </p>
+    <h2>Usage</h2>
+    <p>
+      Millwright's zero configuration approach means that projects have to follow some structural
+      guidelines to take advantage of it's features. We'll use some commented example code to walk
+      through these details.
+    </p>
+    <h3>Project structure</h3>
+    <p>
+      A project that uses Millwright doesn't <em>need</em> to have anything except a 
   </section>
   <footer class="container">
     <p>&copy; 2016-2017 Shawn Erquhart. Released under the MIT license.</p>
