@@ -9,12 +9,23 @@
 </head>
 
 <body>
-  <section class="project-status">
-    <div class="container container-wide">
+  <section class="announcement-bar">
+    <div class="announcement announcement-loud">
       <p>
         <strong>Millwright.js is currently in alpha.</strong>
         It is expected to work as described, but needs quite a lot of testing. Please use Millwright
-        carefully during this phase. Pull requests and issues on GitHub are most welcome!!
+        carefully during this phase.
+        <a href="https://github.com/millwrightjs/millwright/issues">New issues on GitHub</a> are
+        encouraged and appreciated!
+      </p>
+    </div>
+    <div class="announcement">
+      <p>
+        <strong>Calling all developers:</strong>
+        Millwright is young, and there's lots of work to be done. If you like where the project is
+        headed and want to help make it better,
+        <a href="https://github.com/millwrightjs/millwright">join us on GitHub</a>
+        and get in on the action!
       </p>
     </div>
   </section>
@@ -86,21 +97,20 @@
       with how to setup and run the tool, and is instead focused on how your project can take
       advantage of what Millwright does automatically.
     </p>
-    <h3>Project structure</h3>
     <p>
-      To use Millwright, your project will need to follow a few structural guidelines. The goal here
-      was to require a basic structure inspired by standard practice in the community, nothing
-      Millwright-specific that would tie your project to a tool.
+      Millwright requires a <code>src</code> directory. By default, everything in the
+      <code>src</code> directory is simply copied to the <code>dest</code> directory (except for
+      templates, more on that soon). This means that simple sites or apps that don't use a build
+      tool can begin using Millwright incrementally.
     </p>
+    <p>Here's an example scenario:</p>
+
+      
+    <h3>Templates</h3>
     <p>
-      A project that uses Millwright doesn't <em>need</em> to have anything except a
-      <code>src</code> directory.  With just that, Millwright would copy everything to a
-      <code>dest</code> directory, compiling any mustache templates along the way. But we probably
-      want to do more than that. We'll use some commented example code to walk through how this
-      structure looks and works.
-    </p>
-    <p>
-      Let's look at a very basic example structure:
+      Templates are just html files with extra tags. When Millwright builds the template, the output
+      will be an html file. Millwright currently supports Mustache templates, with other options
+      coming soon.
     </p>
     <div class="code-block">
 <pre>

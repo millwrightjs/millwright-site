@@ -10,7 +10,7 @@ body {
 }
 
 a:visited {
-  color: #000;
+  color: inherit;
 }
 
 pre {
@@ -24,10 +24,6 @@ pre {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-
-  &.container-wide {
-    max-width: 1600px;
-  }
 }
 
 header {
@@ -86,11 +82,20 @@ code,
   line-height: 1.4;
 }
 
-.project-status {
+.announcement-bar {
+  display: flex;
+}
+
+.announcement {
   background-color: #eee;
-  padding: 24px 0;
+  padding: 24px 40px;
   font-size: 24px;
   line-height: 1.6;
+
+  &.announcement-loud {
+    background-color: #000;
+    color: #fff;
+  }
 }
 
 .project-description {
