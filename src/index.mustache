@@ -98,56 +98,423 @@
       advantage of what Millwright does automatically.
     </p>
     <p>
-      Millwright requires a <code>src</code> directory. By default, everything in the
-      <code>src</code> directory is simply copied to the <code>dest</code> directory (except for
-      templates, more on that soon). This means that simple sites or apps that don't use a build
-      tool can begin using Millwright incrementally.
+      Millwright requires a <code>src</code> directory (name can be changed via
+      <a href="#options">options</a>). By default, everything in the <code>src</code> directory is
+      simply copied to the <code>dest</code> directory (except for templates, more on that soon).
+      This means that simple sites or apps that don't use a build tool can begin using Millwright
+      incrementally.
     </p>
     <p>Here's an example scenario:</p>
+    <h4>file structure (before)</h4>
+    <div class="code-block">
+<pre>
+└─ src
+    ├─ index.html
+    ├─ about.html
+    ├─ styles.css
+    └─ more-pages
+        ├─ index.html
+        ├─ another-page.html
+        ├─ scripts.js
+        └─ styles.css
+</pre>
+    </div>
 
-      
-    <h3>Templates</h3>
+    <p>Given the file structure above, running <code>mill make</code> would produce this:</p>
+
+    <h4>file structure (after)</h4>
+    <div class="code-block">
+<pre>
+├─ src
+|   ├─ about.html
+|   ├─ index.html
+|   ├─ styles.css
+|   └─ more-pages
+|       ├─ index.html
+|       ├─ another-page.html
+|       ├─ scripts.js
+|       └─ styles.css
+└─ dest
+    ├─ about.html
+    ├─ index.html
+    ├─ styles.css
+    └─ more-pages
+        ├─ index.html
+        ├─ another-page.html
+        ├─ scripts.js
+        └─ styles.css
+</pre>
+    </div>
+
     <p>
-      Templates are just html files with extra tags. When Millwright builds the template, the output
-      will be an html file. Millwright currently supports Mustache templates, with other options
-      coming soon.
+      The files haven't been changed at all, just copied to a new <code>dest</code> directory. This
+      directory would then serve as the web root for the project. In subsequent sections we'll
+      look at the different things Millwright can do for static sites and apps.
     </p>
+    <p>
+      <strong>Note:</strong> any supported template files (currently just mustache) will always be
+      compiled to html when running a <code>mill</code> command.
+    </p>
+
+    <h2>Templates</h2>
+    <p>
+      Templates are html files with superpowers. When Millwright compiles a template, the output
+      will be an html file. Millwright currently supports
+      <a href="https://mustache.github.io/mustache.5.html">mustache</a>
+      templates, with other options coming soon.
+    </p>
+
+    <h3>Tags</h3>
+    <p>
+      Templating languages utilize special tags, which the templating library looks for when
+      processing a file. Mustache uses double curly braces <code>{{ }}</code> as tags by default,
+      but this tends to conflict with commonly used front end frameworks like Angular. For this
+      reason, the default template tags for Millwright include a bracket in between the double
+      curlies
+
+      <code>{[{#lambdas.escape}]}{[{ }]}{[{/lambdas.escape}]}</code>,
+
+      effectively sidestepping this issue.
+    </p>
+    <p>
+      The default tags can be changed if desired - check out <a href="#options">options</a> for more
+      info.
+    </p>
+
+    <h3>Variables</h3>
+    <p>
+      Variables are the references provided by template tags, which are parsed during compilation.
+      When a template variable is encountered, Millwright will look for a the associated value in
+      the <code>json</code> file with the same name as the template. Variables found in
+      <code>src/example.mustache</code> would be checked against <code>src/example.json</code>, if
+      it exists. If the value is unavailable for some reason, Millwright will fall back to the
+      <code>json</code> file associated with whatever
+      <a href="#wrapper">wrapper</a> is being used by the template. If no value is found, the tag
+      will simply be removed from the template.
+    </p>
+
+    <p>Here's an example of template variables in use:</p>
+
+    <h4>file structure (after running <code>mill make</code>)</h4>
     <div class="code-block">
 <pre>
-package.json
-node_modules
-src
- ├─ index.json
- └─ index.mustache
+├─ src
+|   ├─ index.mustache
+|   └─ index.json
+└─ dest
+    └─ index.html
 </pre>
     </div>
-    <h4>index.json</h4>
+
+    <h4>src/index.json</h4>
     <div class="code-block">
 <pre>
+{[{#lambdas.escape}]}
 {
-  "pageTitle": "Home",
-  "assets": {
-    "styles": ["styles.sass"]
-  }
+  "page-title": "Example Website",
+  "example-content": "This is example content from src/index.json."
+  "some-list-items": [
+    {"item": "Item 1"},
+    {"item": "Item 2"},
+    {"item": "Item 3"}
+  ],
+  "more-list-items": [
+    "Item 4",
+    "Item 5",
+    "Item 6"
+  ]
 }
+{[{/lambdas.escape}]}
 </pre>
     </div>
-    <h4>index.mustache</h4>
+
+    <h4>src/index.mustache</h4>
     <div class="code-block">
 <pre>
 {[{#lambdas.escape}]}
 <head>
-  <title>Example Website{[{# pageTitle}]}| {[{.}]}{[{/ pageTitle}]}</title>
-
-  {[{# assets.styles}]}
-    <link href="{[{.}]}" rel="stylesheet">
-  {[{/ assets.styles}]}
+  <title>{[{page-title}]}</title>
 </head>
+<body>
+  <p>{[{example-content}]}</p>
+
+  <ul>
+    {[{#some-list-items}]}
+      <li>{[{item}]}</li>
+    {[{/some-list-items}]}
+  </ul>
+
+  <ol>
+    {[{#more-list-items}]}
+      <li>{[{.}]}</li>
+    {[{/more-list-items}]}
+  </ol>
+</body>
 {[{/lambdas.escape}]}
 </pre>
-
     </div>
+
+    <h4>dest/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<head>
+  <title>Example Website</title>
+</head>
+<body>
+  <p>This is example content from src/index.json.</p>
+
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+
+  <ol>
+    <li>Item 4</li>
+    <li>Item 5</li>
+    <li>Item 6</li>
+  </ol>
+</body>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h3>Wrappers</h3>
+    <p>
+      Most sites and apps have a common header and footer that are used sitewide. Millwright uses a
+      "wrapper" concept to allow this kind of global markup to be kept in a single file. If a
+      wrapper template, eg. <code>wrapper.mustache</code> is found in the <code>src</code>
+      directory, all templates in that directory (including nested directories) will be injected
+      into the wrapper template as a partial, using the reserved <code>page</code> variable.
+    </p>
+    <p>
+      Wrappers may also be nested. A template will use the nearest wrapper, starting from it's own
+      directory, and then checking each parent directory until <code>src</code>.
+    </p>
+    <p>
+      Finally, note that wrappers are entirely optional. If no wrapper is found for a template, the
+      template will be compiled as is.
+    </p>
+
+    <h4>file structure (after running <code>mill make</code>)</h4>
+    <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ extra.mustache
+|   ├─ wrapper.mustache
+|   ├─ nested-with-wrapper
+|   |   ├─ index.mustache
+|   |   └─ wrapper.mustache
+|   └─ nested-without-wrapper
+|       └─ index.mustache
+└─ dest
+    ├─ index.html
+    ├─ extra.html
+    ├─ nested-with-wrapper
+    |   └─ index.html
+    └─ nested-without-wrapper
+        └─ index.html
+</pre>
+    </div>
+
+    <h4>src/index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/extra.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/extra.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/wrapper.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
+
+{[{> page}]}
+
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/nested-with-wrapper/index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-with-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/nested-with-wrapper/wrapper.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+
+{[{> page}]}
+
+<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/nested-without-wrapper/index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-without-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
+
+<p>Content from src/index.mustache</p>
+
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/extra.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
+
+<p>Content from src/extra.mustache</p>
+
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/nested-with-wrapper/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+
+<p>Content from src/nested-with-wrapper/index.mustache</p>
+
+<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/nested-without-wrapper/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
+
+<p>Content from src/nested-without-wrapper/index.mustache</p>
+
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h3>Partials</h3>
+    <p>
+      Partials are templates that can be included within other templates. In mustache, partial tags
+      are denoted by the greater-than symbol, eg.
+      <code>{[{#lambdas.escape}]}{[{> partial-name}]}{[{/lambdas.escape}]}</code>.
+      Millwright will look for partials in the <code>src/partials</code> directory, using the
+      filename sans extension. For example,
+      <code>{[{#lambdas.escape}]}{[{> my-partial}]}{[{/lambdas.escape}]}</code> will yield the
+      contents of <code>src/partials/my-partial.mustache</code>.
+    </p>
+
+    <h4>file structure (after running <code>mill make</code>)</h4>
+    <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ nested
+|   |   └─ index.mustache
+|   └─ partials
+|       └─ content.mustache
+└─ dest
+    ├─ index.html
+    └─ nested
+        └─ index.html
+</pre>
+    </div>
+
+    <h4>src/index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+
+{[{> content}]}
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/nested/index.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested/index.mustache</p>
+
+{[{> content}]}
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>src/partials/content.mustache</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
+    <h4>dest/nested/index.html</h4>
+    <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested/index.mustache</p>
+
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+    </div>
+
   </section>
+
   <footer class="container">
     <p>&copy; 2016-2017 Shawn Erquhart. Released under the MIT license.</p>
   </footer>

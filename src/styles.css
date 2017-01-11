@@ -9,8 +9,10 @@ body {
   margin: 0;
 }
 
+a,
 a:visited {
   color: inherit;
+  font-weight: bold;
 }
 
 pre {
@@ -78,7 +80,7 @@ code,
 
 .code-block {
   padding: 24px 40px;
-  margin: 40px auto 0;
+  margin: 24px auto 60px;
   line-height: 1.4;
 }
 
@@ -118,15 +120,18 @@ code,
   margin-top: 200px;
 
   & h2 {
+    padding-top: 120px;
     margin-top: 120px;
+    border-top: 4px solid #000;
   }
 
   & h3 {
-    margin-top: 60px;
+    margin-top: 80px;
   }
 
   & h4 {
     margin-top: 60px;
+    margin-bottom: 24px;
   }
 
   & p {
