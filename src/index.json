@@ -3,6 +3,10 @@
     "styles": [
       "https://fonts.googleapis.com/css?family=Roboto:400,700|Source+Code+Pro",
       "styles.css"
+    ],
+    "scripts": [
+      "../node_modules/element-closest/element-closest.js",
+      "scripts.js"
     ]
   }
 }
