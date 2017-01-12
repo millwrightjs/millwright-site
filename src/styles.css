@@ -175,7 +175,8 @@ code.code-command,
     margin-bottom: 24px;
   }
 
-  & p {
+  & p,
+  & ul {
     line-height: 2;
   }
 
