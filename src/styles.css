@@ -191,6 +191,33 @@ header {
   }
 }
 
+.docs-nav {
+  position: absolute;
+  width: 100%;
+  padding-top: 24px;
+
+  &.js-sticky-active {
+    position: fixed;
+    top: 0;
+  }
+
+  & .wrapper {
+    display: inline-block;
+  }
+
+  & ul {
+    padding-right: 120px;
+    margin-left: -100%;
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  & a {
+    font-weight: normal;
+    text-decoration: none;
+  }
+}
+
 .docs-example {
   margin-bottom: 60px;
 
