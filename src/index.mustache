@@ -70,13 +70,13 @@
     </h3>
     <p>
       Millwright requires two packages - a global package, which allows you to use the
-      <code class="code-command">mill</code> command, and a local package, which is installed
+      <code>mill</code> command, and a local package, which is installed
       per-project.
     </p>
     <p>
-      To install the global package, run <code class="code-command">npm install millwright-cli
+      To install the global package, run <code>npm install millwright-cli
         -g</code>.  Then, from inside your project directory, install the local package by running
-      <code class="code-command">npm install millwright --save-dev</code>.
+      <code>npm install millwright --save-dev</code>.
     </p>
     <h3 id="commands">
       <a class="docs-section-link" href="#commands">Commands</a>
@@ -85,19 +85,23 @@
       Millwright currently utilizes a handful of commands centered around static site generation:
     </p>
     <p>
-      <code class="code-command">mill make</code>
+      <code>mill</code>
+      - alias for <code>mill dev</code>
+    </p>
+    <p>
+      <code>mill make</code>
       - generates a development build with no optimization
     </p>
     <p>
-      <code class="code-command">mill build</code>
+      <code>mill build</code>
       - generates an optimized build for production use
     </p>
     <p>
-      <code class="code-command">mill dev</code>
+      <code>mill dev</code>
       - same as <code>mill make</code>, but serves locally and watches for changes.
     </p>
     <p>
-      <code class="code-command">mill preview</code>
+      <code>mill preview</code>
       - same as <code>mill build</code>, but serves locally. Does not watch for changes.
     </p>
     <h2 id="usage">
@@ -722,8 +726,12 @@ module.exports = {module: module, lambda: lambda};
 └─ dest
     ├─ index.html
     ├─ extra.html
+    ├─ styles.css
+    ├─ random-directory
+    |   └─ do-things.js
     ├─ nested-with-wrapper
-    |   └─ index.html
+    |   ├─ index.html
+    |   └─ more-styles.css
     └─ nested-without-wrapper
         └─ index.html
 </pre>
@@ -753,7 +761,7 @@ module.exports = {module: module, lambda: lambda};
 {[{#lambdas.escape}]}
 {
   "assets": {
-    "scripts": [
+    "styles": [
       "../node_modules/module-with-styles/styles.css"
     ]
   }
@@ -1058,6 +1066,21 @@ module.exports = {module: module, lambda: lambda};
       </div>
     </div>
 
+
+    <h3 id="sourcemaps">
+      <a class="docs-section-link" href="#sourcemaps">Sourcemaps</a>
+    </h3>
+    <p>
+      Sourcemaps allow you to interact with your original source files in browser development tools
+      instead of the transpiled/minified/concatenated files that the browser is actually using.
+    </p>
+    <p>
+      Millwright places both sourcemaps and source files in the <code>sourcemaps</code> directory in
+      your project's web root. You can set breakpoints in the JavaScript source files there, and
+      style rule references will automatically map to source files as well.
+    </p>
+
+
     <h2 id="local-development">
       <a class="docs-section-link" href="#local-development">Local Development</a>
     </h2>
@@ -1074,7 +1097,7 @@ module.exports = {module: module, lambda: lambda};
     </h3>
 
     <p>
-      To serve files locally, you can run either the <code class="code-command">mill dev</code>
+      To serve files locally, you can run either the <code>mill dev</code>
       command, for a non-optimized build, ideal for development or the <code class="command">mill
       preview</code> command, which produces and serves a production build, generally for testing
       purposes.
@@ -1105,15 +1128,318 @@ module.exports = {module: module, lambda: lambda};
       the page will be reloaded.
     <p>
 
-    <!--
-      Remaining sections:
 
-      Production Builds (main section)
-      Minification
-      Concatenation
+    <h2 id="production-builds">
+      <a class="docs-section-link" href="#production-builds">Production Builds</a>
+    </h2>
 
-      Options (main section)
-    -->
+    <p>
+      Millwright provides production builds using the <code>mill build</code> command. Currently,
+      that includes minifying and concatenating assets, but Millwright can do much more in the
+      future with little or no changes to how you use it. Things like bundling and tree shaking are
+      on our radar.
+    </p>
+
+
+    <h3 id="minification">
+      <a class="docs-section-link" href="#minification">Minification</a>
+    </h3>
+    <p>
+      JavaScript and CSS assets are minified individually when running <code>mill build</code>. If
+      your file is already minified (ends with <code>.min.js</code> or <code>.min.css</code>,
+      Millwright won't attempt to minify it. If a minified file is found in the same directory as
+      your source file, which is often the case with node modules or bower components, Millwright
+      will just use that instead.
+    </p>
+    <p>
+      When minifying assets, Millwright will also provide sourcemaps, and previous sourcemaps from
+      any transpiling will be passed through as well. See <a href="#sourcemaps">Sourcemaps</a> for
+      more info.
+    <p>
+
+
+
+    <h3 id="concatenation">
+      <a class="docs-section-link" href="#concatenation">Concatenation</a>
+    </h3>
+    <p>
+      Concatenation is an optimization step where multiple files are combined into one so that the
+      browser makes less requests. For those who are able to use HTTP/2 for your project and don't
+      want concatenation, an option is expected for that soon.
+    </p>
+    <p>
+      When concatenating files, the resulting file is named based on the key used in the relevant
+      template data (<code>json</code>) file. For template data files that handle a specific page,
+      the page name is also used to avoid file naming collisions. If a page uses a wrapper with
+      assets, the wrapper assets and page specific assets will be provided in separate files, so
+      that the single wrapper script can be reused by all consumers.
+    </p>
+
+    <div class="docs-example">
+
+      <button class="docs-example-toggle">Show example</button>
+
+      <div class="docs-example-content">
+        <h4>file structure (after running <code>mill build</code>)</h4>
+        <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ extra.mustache
+|   ├─ extra.json
+|   ├─ wrapper.mustache
+|   ├─ wrapper.json
+|   ├─ scripts.js
+|   ├─ more-scripts.js
+|   ├─ styles.css
+|   ├─ more-styles.css
+|   └─ random-directory
+|       └─ do-things.js
+└─ dest
+    ├─ index.html
+    ├─ extra.html
+    ├─ scripts.min.js
+    ├─ styles.min.css
+    ├─ extra-styles.min.css
+    └─ extra-scripts.min.js
+</pre>
+        </div>
+
+        <h4>src/index.mustache</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>src/extra.mustache</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/extra.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>src/extra.json</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "../node_modules/module-with-styles/styles.css"
+    ],
+    "scripts": [
+      "random-directory/do-things.js"
+    ]
+  }
+}
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>src/wrapper.mustache</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.styles}]}
+  <link href="{[{.}]}" rel="stylesheet">
+{[{/assets.styles}]}
+
+{[{#assets.scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.scripts}]}
+
+{[{> page}]}
+
+{[{#assets.some-more-scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.some-more-scripts}]}
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>src/wrapper.json</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "styles.css",
+      "more-styles.css
+    ],
+    "scripts": [
+      "../node_modules/some-module/script.js",
+      "scripts.js",
+      "more-scripts.js"
+    ],
+    "some-more-scripts": [
+      "../bower_components/some-package/another-script.js"
+    ]
+  }
+}
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>dest/index.html</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.min.css" rel="stylesheet">
+
+<script src="/scripts.min.js"></script>
+
+<p>Content from src/index.mustache</p>
+
+<script src="/some-more-scripts.min.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+        <h4>dest/extra.html</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.min.css" rel="stylesheet">
+<link href="/extra-styles.min.css" rel="stylesheet">
+
+<script src="/extra-scripts.min.js"></script>
+
+<p>Content from src/extra.mustache</p>
+
+<script src="/some-more-scripts.min.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+      </div>
+    </div>
+
+
+    <h2 id="options">
+      <a class="docs-section-link" href="#options">Options</a>
+    </h2>
+    <p>
+      Millwright is designed to work without any tool configuration whatsoever, but if the defaults
+      don't work for some reason, options can be set via <code>millwright.json</code>. <strong>This
+      is a completely optional file.</strong> It should be added to the root of your project
+      (alongside <code>package.json</code>) when used.
+    </p>
+    <p>
+      Here are the available options:
+    </p>
+
+    <table>
+      <tr>
+        <th scope="col">Option</th>
+        <th scope="col">Default</th>
+        <th scope="col">Description</th>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>defaultCommand</code></th>
+        <td><code>'dev'</code></td>
+        <td>Command used when running <code>mill</code></td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>srcDir</code></th>
+        <td><code>'src'</code></td>
+        <td>Name of source directory</td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>destDir</code></th>
+        <td><code>'dest'</code></td>
+        <td>Name of output directory</td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>partialsDir</code></th>
+        <td><code>'partials'</code></td>
+        <td>Name of partials directory</td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>lambdasDir</code></th>
+        <td><code>'lambdas'</code></td>
+        <td>Name of lambdas directory</td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>assetIgnoredBasePaths</code></th>
+        <td>
+          <code>
+<pre>
+[
+  (srcDir),
+  'bower_components',
+  'node_modules'
+]
+</pre>
+            </code>
+          </td>
+        <td>
+          Path segments to remove when creating dest paths for assets
+          (eg. node_modules/lib/script.js -> dest/lib/script.js). Must be an array of strings.
+          Setting this option will replace the entire default array.
+        </td>
+      </tr>
+
+      <tr>
+        <th scope="row"><code>templateTags</code></th>
+        <td><code>{[{#lambdas.escape}]}['{[{', '}]}']{[{/lambdas.escape}]}</code></td>
+        <td>
+          Delimiter tags used in templates, must be an array of two strings, with the opening and
+          closing tags in order.
+        </td>
+      </tr>
+    </table>
+
+    <div class="docs-example">
+
+      <button class="docs-example-toggle">Show example</button>
+
+      <div class="docs-example-content">
+        <h4>file structure</h4>
+        <div class="code-block">
+<pre>
+├─ src
+└─ millwright.json
+</pre>
+        </div>
+
+        <h4>src/millwright.json</h4>
+        <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "defaultCommand": "dev",
+  "srcDir": "src",
+  "destDir": "dest",
+  "partialsDir": "partials",
+  "lambdasDir": "lambdas",
+  "assetIgnoredBasePaths: [
+    "src",
+    "bower_components",
+    "node_modules"
+  ],
+  templateTags: [
+    "{[{",
+    "}]}"
+  ]
+}
+{[{/lambdas.escape}]}
+</pre>
+        </div>
+
+      </div>
+    </div>
+
   </section>
 
   <footer class="container">

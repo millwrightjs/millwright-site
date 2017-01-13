@@ -1,7 +1,7 @@
 {
   "assets": {
     "styles": [
-      "https://fonts.googleapis.com/css?family=Roboto:400,700|Source+Code+Pro",
+      "https://fonts.googleapis.com/css?family=Roboto:400,700|Source+Code+Pro:400,700",
       "styles.css"
     ],
     "scripts": [
