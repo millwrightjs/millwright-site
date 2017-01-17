@@ -1,7 +1,11 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Millwright.js</title>
+  <meta name="description" content="A zero configuration build tool for the web.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {[{#assets.styles}]}
     <link href="{[{.}]}" rel="stylesheet">
@@ -38,8 +42,8 @@
   <section class="container">
     <div class="code-block header-code-block">
       <p>cd &lt;your-project-name&gt;</p>
-      <p>npm install millwright-cli -g</p>
-      <p>npm install millwright --save-dev</p>
+      <p>npm install <span class="nowrap">millwright-cli</span> <span class="nowrap">-g</span></p>
+      <p>npm install millwright <span class="nowrap">--save-dev</span></p>
     </div>
   </section>
   <section class="container project-description">
@@ -129,7 +133,7 @@
             per-project.
           </p>
           <p>
-            To install the global package, run <code>npm install millwright-cli -g</code>.  Then,
+            To install the global package, run <code>npm install millwright-cli -g</code>. Then,
             from inside your project directory, install the local package by running
             <code>npm install millwright --save-dev</code>.
           </p>
@@ -196,18 +200,20 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (before)</h4>
-              <div class="code-block">
-  <pre>
-  └─ src
-      ├─ index.html
-      ├─ about.html
-      ├─ styles.css
-      └─ more-pages
-          ├─ index.html
-          ├─ another-page.html
-          ├─ scripts.js
-          └─ styles.css
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+└─ src
+    ├─ index.html
+    ├─ about.html
+    ├─ styles.css
+    └─ more-pages
+        ├─ index.html
+        ├─ another-page.html
+        ├─ scripts.js
+        └─ styles.css
+</pre>
+                </div>
               </div>
 
               <p>
@@ -215,27 +221,29 @@
               </p>
 
               <h4>file structure (after)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ about.html
-  |   ├─ index.html
-  |   ├─ styles.css
-  |   └─ more-pages
-  |       ├─ index.html
-  |       ├─ another-page.html
-  |       ├─ scripts.js
-  |       └─ styles.css
-  └─ dest
-      ├─ about.html
-      ├─ index.html
-      ├─ styles.css
-      └─ more-pages
-          ├─ index.html
-          ├─ another-page.html
-          ├─ scripts.js
-          └─ styles.css
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ about.html
+|   ├─ index.html
+|   ├─ styles.css
+|   └─ more-pages
+|       ├─ index.html
+|       ├─ another-page.html
+|       ├─ scripts.js
+|       └─ styles.css
+└─ dest
+    ├─ about.html
+    ├─ index.html
+    ├─ styles.css
+    └─ more-pages
+        ├─ index.html
+        ├─ another-page.html
+        ├─ scripts.js
+        └─ styles.css
+</pre>
+                </div>
               </div>
 
               <p>
@@ -314,88 +322,100 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill make</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   └─ index.json
-  └─ dest
-      └─ index.html
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block-container">
+                  <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   └─ index.json
+└─ dest
+    └─ index.html
+</pre>
+                  </div>
+                </div>
               </div>
 
               <h4>src/index.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "page-title": "Example Website",
-    "example-content": "This is example content from src/index.json."
-    "some-list-items": [
-      {"item": "Item 1"},
-      {"item": "Item 2"},
-      {"item": "Item 3"}
-    ],
-    "more-list-items": [
-      "Item 4",
-      "Item 5",
-      "Item 6"
-    ]
-  }
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block-container">
+                  <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "page-title": "Example Website",
+  "example-content": "This is example content from src/index.json."
+  "some-list-items": [
+    {"item": "Item 1"},
+    {"item": "Item 2"},
+    {"item": "Item 3"}
+  ],
+  "more-list-items": [
+    "Item 4",
+    "Item 5",
+    "Item 6"
+  ]
+}
+{[{/lambdas.escape}]}
+</pre>
+                  </div>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <head>
-    <title>{[{page-title}]}</title>
-  </head>
-  <body>
-    <p>{[{example-content}]}</p>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<head>
+  <title>{[{page-title}]}</title>
+</head>
+<body>
+  <p>{[{example-content}]}</p>
 
-    <ul>
-      {[{#some-list-items}]}
-        <li>{[{item}]}</li>
-      {[{/some-list-items}]}
-    </ul>
+  <ul>
+    {[{#some-list-items}]}
+      <li>{[{item}]}</li>
+    {[{/some-list-items}]}
+  </ul>
 
-    <ol>
-      {[{#more-list-items}]}
-        <li>{[{.}]}</li>
-      {[{/more-list-items}]}
-    </ol>
-  </body>
-  {[{/lambdas.escape}]}
-  </pre>
+  <ol>
+    {[{#more-list-items}]}
+      <li>{[{.}]}</li>
+    {[{/more-list-items}]}
+  </ol>
+</body>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <head>
-    <title>Example Website</title>
-  </head>
-  <body>
-    <p>This is example content from src/index.json.</p>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<head>
+  <title>Example Website</title>
+</head>
+<body>
+  <p>This is example content from src/index.json.</p>
 
-    <ul>
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
 
-    <ol>
-      <li>Item 4</li>
-      <li>Item 5</li>
-      <li>Item 6</li>
-    </ol>
-  </body>
-  {[{/lambdas.escape}]}
-  </pre>
+  <ol>
+    <li>Item 4</li>
+    <li>Item 5</li>
+    <li>Item 6</li>
+  </ol>
+</body>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -435,139 +455,161 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill make</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   ├─ extra.mustache
-  |   ├─ wrapper.mustache
-  |   ├─ nested-with-wrapper
-  |   |   ├─ index.mustache
-  |   |   └─ wrapper.mustache
-  |   └─ nested-without-wrapper
-  |       └─ index.mustache
-  └─ dest
-      ├─ index.html
-      ├─ extra.html
-      ├─ nested-with-wrapper
-      |   └─ index.html
-      └─ nested-without-wrapper
-          └─ index.html
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ extra.mustache
+|   ├─ wrapper.mustache
+|   ├─ nested-with-wrapper
+|   |   ├─ index.mustache
+|   |   └─ wrapper.mustache
+|   └─ nested-without-wrapper
+|       └─ index.mustache
+└─ dest
+    ├─ index.html
+    ├─ extra.html
+    ├─ nested-with-wrapper
+    |   └─ index.html
+    └─ nested-without-wrapper
+        └─ index.html
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/extra.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/extra.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/extra.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/wrapper.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
 
-  {[{> page}]}
+{[{> page}]}
 
-  <p>Footer from src/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-with-wrapper/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested-with-wrapper/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-with-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-with-wrapper/wrapper.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
 
-  {[{> page}]}
+{[{> page}]}
 
-  <p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-without-wrapper/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested-without-wrapper/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-without-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
 
-  <p>Content from src/index.mustache</p>
+<p>Content from src/index.mustache</p>
 
-  <p>Footer from src/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/extra.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
 
-  <p>Content from src/extra.mustache</p>
+<p>Content from src/extra.mustache</p>
 
-  <p>Footer from src/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/nested-with-wrapper/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
 
-  <p>Content from src/nested-with-wrapper/index.mustache</p>
+<p>Content from src/nested-with-wrapper/index.mustache</p>
 
-  <p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/nested-without-wrapper/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <h1>Header from src/wrapper.mustache</h1>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<h1>Header from src/wrapper.mustache</h1>
 
-  <p>Content from src/nested-without-wrapper/index.mustache</p>
+<p>Content from src/nested-without-wrapper/index.mustache</p>
 
-  <p>Footer from src/wrapper.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Footer from src/wrapper.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -600,72 +642,84 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill make</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   ├─ nested
-  |   |   └─ index.mustache
-  |   └─ partials
-  |       └─ content.mustache
-  └─ dest
-      ├─ index.html
-      └─ nested
-          └─ index.html
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ nested
+|   |   └─ index.mustache
+|   └─ partials
+|       └─ content.mustache
+└─ dest
+    ├─ index.html
+    └─ nested
+        └─ index.html
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/index.mustache</p>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
 
-  {[{> content}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{> content}]}
+{[{/lambdas.escape}]}
+</pre>
+                  </div>
                 </div>
 
                 <h4>src/nested/index.mustache</h4>
-                <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested/index.mustache</p>
+                <div class="code-block-container">
+                  <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested/index.mustache</p>
 
-  {[{> content}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{> content}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/partials/content.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/partials/content.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/index.mustache</p>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
 
-  <p>Content from src/partials/content.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/nested/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested/index.mustache</p>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested/index.mustache</p>
 
-  <p>Content from src/partials/content.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Content from src/partials/content.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -685,7 +739,7 @@
             Unlike partials, lambdas don't have a special tag in mustache (instead the list tag
             <code>{[{#lambdas.escape}]}{[{#...}]}{[{/...}]}{[{/lambdas.escape}]}</code> is used), so
             the lambda file name must be prefixed with "lambdas", eg.
-            <code>{[{#lambdas.escape}]}
+            <code class="wrap">{[{#lambdas.escape}]}
               {[{#lambdas.my-lambda}]}...{[{/lambdas.my-lambda}]}
             {[{/lambdas.escape}]}</code>.
           </p>
@@ -711,58 +765,66 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill make</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   └─ lambdas
-  |       └─ escape.mustache
-  └─ dest
-      └─ index.html
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   └─ lambdas
+|       └─ escape.mustache
+└─ dest
+    └─ index.html
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
+              <div class="code-block-container">
               <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>
-    This paragraph is meant to be displayed as code, with tags included, so it
-    has to be html escaped.
-  </p>
-  {[{/lambdas.escape}]}
-  <pre>
-  {[{/lambdas.escape}]}
-  </pre>
+<pre>
+{[{#lambdas.escape}]}
+<pre>
+{[{#lambdas.escape}]}
+<p>
+  This paragraph is meant to be displayed as code, with tags included, so it
+  has to be html escaped.
+</p>
+{[{/lambdas.escape}]}
+</pre>
+{[{/lambdas.escape}]}
+</pre>
               </div>
+            </div>
 
               <h4>src/lambdas/escape.js</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  const escape = require('escape-html');
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+const escape = require('escape-html');
 
-  module.exports = {module: module, lambda: lambda};
+module.exports = {module: module, lambda: lambda};
 
-   pfunction lambda(template) {
-    return escape(template).trim();
-  }
-  {[{/lambdas.escape}]}
-  </pre>
+ pfunction lambda(template) {
+  return escape(template).trim();
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  &lt;p&gt;
-    This paragraph is meant to be displayed as code, with tags included, so it
-    has to be html escaped.
-  &lt;/p&gt;
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+&lt;p&gt;
+  This paragraph is meant to be displayed as code, with tags included, so it
+  has to be html escaped.
+&lt;/p&gt;
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -831,219 +893,247 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill make</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   ├─ extra.mustache
-  |   ├─ extra.json
-  |   ├─ wrapper.mustache
-  |   ├─ wrapper.json
-  |   ├─ styles.css
-  |   ├─ random-directory
-  |   |   └─ do-things.js
-  |   ├─ nested-with-wrapper
-  |   |   ├─ index.mustache
-  |   |   ├─ wrapper.mustache
-  |   |   ├─ wrapper.json
-  |   |   └─ more-styles.css
-  |   └─ nested-without-wrapper
-  |       ├─ index.mustache
-  |       └─ index.json
-  └─ dest
-      ├─ index.html
-      ├─ extra.html
-      ├─ styles.css
-      ├─ random-directory
-      |   └─ do-things.js
-      ├─ nested-with-wrapper
-      |   ├─ index.html
-      |   └─ more-styles.css
-      └─ nested-without-wrapper
-          └─ index.html
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ extra.mustache
+|   ├─ extra.json
+|   ├─ wrapper.mustache
+|   ├─ wrapper.json
+|   ├─ styles.css
+|   ├─ random-directory
+|   |   └─ do-things.js
+|   ├─ nested-with-wrapper
+|   |   ├─ index.mustache
+|   |   ├─ wrapper.mustache
+|   |   ├─ wrapper.json
+|   |   └─ more-styles.css
+|   └─ nested-without-wrapper
+|       ├─ index.mustache
+|       └─ index.json
+└─ dest
+    ├─ index.html
+    ├─ extra.html
+    ├─ styles.css
+    ├─ random-directory
+    |   └─ do-things.js
+    ├─ nested-with-wrapper
+    |   ├─ index.html
+    |   └─ more-styles.css
+    └─ nested-without-wrapper
+        └─ index.html
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/extra.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/extra.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/extra.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/extra.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "styles": [
-        "../node_modules/module-with-styles/styles.css"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "../node_modules/module-with-styles/styles.css"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/wrapper.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {[{#assets.styles}]}
-    <link href="{[{.}]}" rel="stylesheet">
-  {[{/assets.styles}]}
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.styles}]}
+  <link href="{[{.}]}" rel="stylesheet">
+{[{/assets.styles}]}
 
-  {[{#assets.scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.scripts}]}
+{[{#assets.scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.scripts}]}
 
-  {[{> page}]}
+{[{> page}]}
 
-  {[{#assets.some-more-scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.some-more-scripts}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{#assets.some-more-scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.some-more-scripts}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/wrapper.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "styles": [
-        "styles.css",
-      ],
-      "scripts": [
-        "../node_modules/some-module/script.js"
-      ],
-      "some-more-scripts": [
-        "../bower_components/some-package/another-script.js",
-        "random-directory/do-things.js"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "styles.css",
+    ],
+    "scripts": [
+      "../node_modules/some-module/script.js"
+    ],
+    "some-more-scripts": [
+      "../bower_components/some-package/another-script.js",
+      "random-directory/do-things.js"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-with-wrapper/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested-with-wrapper/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-with-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-with-wrapper/wrapper.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {[{#assets.random-name}]}
-    <link href="{[{.}]}" rel="stylesheet">
-  {[{/assets.random-name}]}
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.random-name}]}
+  <link href="{[{.}]}" rel="stylesheet">
+{[{/assets.random-name}]}
 
-  {[{> page}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{> page}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-with-wrapper/wrapper.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "random-name": [
-        "more-styles.css"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "random-name": [
+      "more-styles.css"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/nested-without-wrapper/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/nested-without-wrapper/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/nested-without-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="/styles.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.css" rel="stylesheet">
 
-  <script src="/some-module/script.js"></script>
+<script src="/some-module/script.js"></script>
 
-  <p>Content from src/index.mustache</p>
+<p>Content from src/index.mustache</p>
 
-  <script src="/some-package/another-script.js"></script>
-  <script src="/random-directory/do-things.js"></script>
-  {[{/lambdas.escape}]}
-  </pre>
+<script src="/some-package/another-script.js"></script>
+<script src="/random-directory/do-things.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/extra.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="/styles.css" rel="stylesheet">
-  <link href="/module-with-styles/styles.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.css" rel="stylesheet">
+<link href="/module-with-styles/styles.css" rel="stylesheet">
 
-  <script src="/some-module/script.js"></script>
+<script src="/some-module/script.js"></script>
 
-  <p>Content from src/extra.mustache</p>
+<p>Content from src/extra.mustache</p>
 
-  <script src="/some-package/another-script.js"></script>
-  <script src="/random-directory/do-things.js"></script>
-  {[{/lambdas.escape}]}
-  </pre>
+<script src="/some-package/another-script.js"></script>
+<script src="/random-directory/do-things.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/nested-with-wrapper/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="awesome-styles.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="awesome-styles.css" rel="stylesheet">
 
-  <p>Content from src/nested-with-wrapper/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+<p>Content from src/nested-with-wrapper/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/nested-without-wrapper/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="/styles.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.css" rel="stylesheet">
 
-  <script src="/some-module/script.js"></script>
+<script src="/some-module/script.js"></script>
 
-  <p>Content from src/nested-without-wrapper/index.mustache</p>
+<p>Content from src/nested-without-wrapper/index.mustache</p>
 
-  <script src="/some-package/another-script.js"></script>
-  <script src="/random-directory/do-things.js"></script>
-  {[{/lambdas.escape}]}
-  </pre>
+<script src="/some-package/another-script.js"></script>
+<script src="/random-directory/do-things.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -1093,56 +1183,62 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure</h4>
-              <div class="code-block">
-  <pre>
-  └─ src
-      ├─ index.mustache
-      ├─ index.json
-      ├─ some-es6.js
-      ├─ coffeescript.coffee
-      ├─ styles-in-cssnext.css
-      ├─ sass.scss
-      ├─ imports-work-too.scss
-      ├─ less.less
-      └─ stylus.styl
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+└─ src
+    ├─ index.mustache
+    ├─ index.json
+    ├─ some-es6.js
+    ├─ coffeescript.coffee
+    ├─ styles-in-cssnext.css
+    ├─ sass.scss
+    ├─ imports-work-too.scss
+    ├─ less.less
+    └─ stylus.styl
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {[{#assets.styles}]}
-    <link href="{[{.}]}" rel="stylesheet">
-  {[{/assets.styles}]}
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.styles}]}
+  <link href="{[{.}]}" rel="stylesheet">
+{[{/assets.styles}]}
 
-  {[{#assets.scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.scripts}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{#assets.scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.scripts}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/index.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "scripts": [
-        "some-es6.js",
-        "coffeescript.coffee"
-      ],
-      "styles": [
-        "styles-in-cssnext.css",
-        "sass.scss",
-        "less.less",
-        "stylus.styl"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "scripts": [
+      "some-es6.js",
+      "coffeescript.coffee"
+    ],
+    "styles": [
+      "styles-in-cssnext.css",
+      "sass.scss",
+      "less.less",
+      "stylus.styl"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -1170,39 +1266,45 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure</h4>
-              <div class="code-block">
-  <pre>
-  └─ src
-      ├─ index.mustache
-      └─ index.json
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+└─ src
+    ├─ index.mustache
+    └─ index.json
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {[{#assets.scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.scripts}]}
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.scripts}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/index.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "scripts": [
-        "https://unpkg.com/lodash@4.17.4"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "scripts": [
+      "https://unpkg.com/lodash@4.17.4"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
-              <div>
+}
+{[{/lambdas.escape}]}
+</pre>
+                <div>
+              </div>
             </div>
           </div>
         </div>
@@ -1346,140 +1448,156 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure (after running <code>mill build</code>)</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  |   ├─ index.mustache
-  |   ├─ extra.mustache
-  |   ├─ extra.json
-  |   ├─ wrapper.mustache
-  |   ├─ wrapper.json
-  |   ├─ scripts.js
-  |   ├─ more-scripts.js
-  |   ├─ styles.css
-  |   ├─ more-styles.css
-  |   └─ random-directory
-  |       └─ do-things.js
-  └─ dest
-      ├─ index.html
-      ├─ extra.html
-      ├─ scripts.min.js
-      ├─ styles.min.css
-      ├─ extra-styles.min.css
-      └─ extra-scripts.min.js
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+|   ├─ index.mustache
+|   ├─ extra.mustache
+|   ├─ extra.json
+|   ├─ wrapper.mustache
+|   ├─ wrapper.json
+|   ├─ scripts.js
+|   ├─ more-scripts.js
+|   ├─ styles.css
+|   ├─ more-styles.css
+|   └─ random-directory
+|       └─ do-things.js
+└─ dest
+    ├─ index.html
+    ├─ extra.html
+    ├─ scripts.min.js
+    ├─ styles.min.css
+    ├─ extra-styles.min.css
+    └─ extra-scripts.min.js
+</pre>
+                </div>
               </div>
 
               <h4>src/index.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/index.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/index.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/extra.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <p>Content from src/extra.mustache</p>
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<p>Content from src/extra.mustache</p>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/extra.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "styles": [
-        "../node_modules/module-with-styles/styles.css"
-      ],
-      "scripts": [
-        "random-directory/do-things.js"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "../node_modules/module-with-styles/styles.css"
+    ],
+    "scripts": [
+      "random-directory/do-things.js"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/wrapper.mustache</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {[{#assets.styles}]}
-    <link href="{[{.}]}" rel="stylesheet">
-  {[{/assets.styles}]}
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{[{#assets.styles}]}
+  <link href="{[{.}]}" rel="stylesheet">
+{[{/assets.styles}]}
 
-  {[{#assets.scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.scripts}]}
+{[{#assets.scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.scripts}]}
 
-  {[{> page}]}
+{[{> page}]}
 
-  {[{#assets.some-more-scripts}]}
-    <script src="{[{.}]}"></script>
-  {[{/assets.some-more-scripts}]}
-  {[{/lambdas.escape}]}
-  </pre>
+{[{#assets.some-more-scripts}]}
+  <script src="{[{.}]}"></script>
+{[{/assets.some-more-scripts}]}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>src/wrapper.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "assets": {
-      "styles": [
-        "styles.css",
-        "more-styles.css
-      ],
-      "scripts": [
-        "../node_modules/some-module/script.js",
-        "scripts.js",
-        "more-scripts.js"
-      ],
-      "some-more-scripts": [
-        "../bower_components/some-package/another-script.js"
-      ]
-    }
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "assets": {
+    "styles": [
+      "styles.css",
+      "more-styles.css
+    ],
+    "scripts": [
+      "../node_modules/some-module/script.js",
+      "scripts.js",
+      "more-scripts.js"
+    ],
+    "some-more-scripts": [
+      "../bower_components/some-package/another-script.js"
+    ]
   }
-  {[{/lambdas.escape}]}
-  </pre>
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/index.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="/styles.min.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.min.css" rel="stylesheet">
 
-  <script src="/scripts.min.js"></script>
+<script src="/scripts.min.js"></script>
 
-  <p>Content from src/index.mustache</p>
+<p>Content from src/index.mustache</p>
 
-  <script src="/some-more-scripts.min.js"></script>
-  {[{/lambdas.escape}]}
-  </pre>
+<script src="/some-more-scripts.min.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
 
               <h4>dest/extra.html</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  <link href="/styles.min.css" rel="stylesheet">
-  <link href="/extra-styles.min.css" rel="stylesheet">
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+<link href="/styles.min.css" rel="stylesheet">
+<link href="/extra-styles.min.css" rel="stylesheet">
 
-  <script src="/extra-scripts.min.js"></script>
+<script src="/extra-scripts.min.js"></script>
 
-  <p>Content from src/extra.mustache</p>
+<p>Content from src/extra.mustache</p>
 
-  <script src="/some-more-scripts.min.js"></script>
-  {[{/lambdas.escape}]}
-  </pre>
+<script src="/some-more-scripts.min.js"></script>
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -1503,72 +1621,74 @@
             Here are the available options:
           </p>
 
-          <table>
-            <tr>
-              <th scope="col">Option</th>
-              <th scope="col">Default</th>
-              <th scope="col">Description</th>
-            </tr>
+          <div class="table-container">
+            <table>
+              <tr>
+                <th scope="col">Option</th>
+                <th scope="col">Default</th>
+                <th scope="col">Description</th>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>defaultCommand</code></th>
-              <td><code>'dev'</code></td>
-              <td>Command used when running <code>mill</code></td>
-            </tr>
+              <tr>
+                <th scope="row"><code>defaultCommand</code></th>
+                <td><code>'dev'</code></td>
+                <td>Command used when running <code>mill</code></td>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>srcDir</code></th>
-              <td><code>'src'</code></td>
-              <td>Name of source directory</td>
-            </tr>
+              <tr>
+                <th scope="row"><code>srcDir</code></th>
+                <td><code>'src'</code></td>
+                <td>Name of source directory</td>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>destDir</code></th>
-              <td><code>'dest'</code></td>
-              <td>Name of output directory</td>
-            </tr>
+              <tr>
+                <th scope="row"><code>destDir</code></th>
+                <td><code>'dest'</code></td>
+                <td>Name of output directory</td>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>partialsDir</code></th>
-              <td><code>'partials'</code></td>
-              <td>Name of partials directory</td>
-            </tr>
+              <tr>
+                <th scope="row"><code>partialsDir</code></th>
+                <td><code>'partials'</code></td>
+                <td>Name of partials directory</td>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>lambdasDir</code></th>
-              <td><code>'lambdas'</code></td>
-              <td>Name of lambdas directory</td>
-            </tr>
+              <tr>
+                <th scope="row"><code>lambdasDir</code></th>
+                <td><code>'lambdas'</code></td>
+                <td>Name of lambdas directory</td>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>assetIgnoredBasePaths</code></th>
-              <td>
-                <code>
-    <pre>
-    [
-      (srcDir),
-      'bower_components',
-      'node_modules'
-    ]
-    </pre>
-                  </code>
+              <tr>
+                <th scope="row"><code>assetIgnoredBasePaths</code></th>
+                <td>
+                  <code>
+<pre>
+[
+  (srcDir),
+  'bower_components',
+  'node_modules'
+]
+</pre>
+                    </code>
+                  </td>
+                <td>
+                  Path segments to remove when creating dest paths for assets
+                  (eg. node_modules/lib/script.js -> dest/lib/script.js). Must be an array of strings.
+                  Setting this option will replace the entire default array.
                 </td>
-              <td>
-                Path segments to remove when creating dest paths for assets
-                (eg. node_modules/lib/script.js -> dest/lib/script.js). Must be an array of strings.
-                Setting this option will replace the entire default array.
-              </td>
-            </tr>
+              </tr>
 
-            <tr>
-              <th scope="row"><code>templateTags</code></th>
-              <td><code>{[{#lambdas.escape}]}['{[{', '}]}']{[{/lambdas.escape}]}</code></td>
-              <td>
-                Delimiter tags used in templates, must be an array of two strings, with the opening
-                and closing tags in order.
-              </td>
-            </tr>
-          </table>
+              <tr>
+                <th scope="row"><code>templateTags</code></th>
+                <td><code>{[{#lambdas.escape}]}['{[{', '}]}']{[{/lambdas.escape}]}</code></td>
+                <td>
+                  Delimiter tags used in templates, must be an array of two strings, with the opening
+                  and closing tags in order.
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div class="docs-example">
@@ -1580,35 +1700,39 @@
           <div class="docs-example-content">
             <div class="container">
               <h4>file structure</h4>
-              <div class="code-block">
-  <pre>
-  ├─ src
-  └─ millwright.json
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+└─ millwright.json
+</pre>
+                </div>
               </div>
 
               <h4>src/millwright.json</h4>
-              <div class="code-block">
-  <pre>
-  {[{#lambdas.escape}]}
-  {
-    "defaultCommand": "dev",
-    "srcDir": "src",
-    "destDir": "dest",
-    "partialsDir": "partials",
-    "lambdasDir": "lambdas",
-    "assetIgnoredBasePaths: [
-      "src",
-      "bower_components",
-      "node_modules"
-    ],
-    templateTags: [
-      "{[{",
-      "}]}"
-    ]
-  }
-  {[{/lambdas.escape}]}
-  </pre>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  "defaultCommand": "dev",
+  "srcDir": "src",
+  "destDir": "dest",
+  "partialsDir": "partials",
+  "lambdasDir": "lambdas",
+  "assetIgnoredBasePaths: [
+    "src",
+    "bower_components",
+    "node_modules"
+  ],
+  templateTags: [
+    "{[{",
+    "}]}"
+  ]
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
               </div>
             </div>
           </div>
@@ -1618,8 +1742,11 @@
   </section>
 
 
-  <footer class="container">
-    <p>&copy; 2016-2017 Shawn Erquhart. Released under the MIT license.</p>
+  <footer class="container footer">
+    <p>
+      <span class="preserve-line">&copy; 2016-2017 Shawn Erquhart.</span>
+      <span class="preserve-line">Released under the MIT license.</span>
+    </p>
   </footer>
 
   {[{#assets.scripts}]}

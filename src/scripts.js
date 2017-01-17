@@ -110,3 +110,23 @@ function deactivateSticky(elementObj) {
   elementObj.element.classList.remove('js-sticky-active');
   elementObj.stickyActive = false;
 }
+
+
+// Mobile docs nav masonry
+let masonryInstance;
+initDocsNavMasonry();
+window.addEventListener('resize', initDocsNavMasonry);
+
+function initDocsNavMasonry () {
+  if (!masonryInstance && window.matchMedia('(min-width: 360px) and (max-width: 859px)').matches) {
+    masonryInstance = new Masonry('.docs-nav', {
+      itemSelector: '.docs-nav-section',
+      columnWidth: '.docs-nav-section',
+      percentPosition: true,
+      gutter: 24
+    });
+  } else if (masonryInstance && window.matchMedia('(max-width: 359px), (min-width: 860px)').matches) {
+    masonryInstance.destroy();
+    masonryInstance = null;
+  }
+}

@@ -1,12 +1,24 @@
+@custom-media --width-x-narrow (width >= 360px);
+@custom-media --width-narrow (width >= 860px);
+@custom-media --width-standard (width >= 1260px);
+@custom-media --width-wide (width >= 1600px);
+@custom-media --width-x-wide (width >= 1760px);
+
 :root {
+  --container-padding: 16px;
   --clearfix: {
     content: '';
     display: table;
     clear: both;
   }
   --container: {
+    padding: 0 var(--container-padding);
     margin: 0 auto;
     max-width: 1200px;
+
+    @media (--width-wide) {
+      padding: 0;
+    }
   }
 };
 
@@ -15,14 +27,23 @@
 }
 
 body {
+  -webkit-text-size-adjust: 100%;
   margin: 0;
 }
 
 body,
 button {
   font-family: 'Roboto', sans-serif;
-  font-size: 24px;
+  font-size: 16px;
   font-variant-ligatures: no-common-ligatures;
+
+  @media (--width-narrow) {
+    font-size: 20px;
+  }
+
+  @media (--width-wide) {
+    font-size: 24px;
+  }
 }
 
 a,
@@ -32,15 +53,31 @@ a:visited {
   display: inline-block;
 }
 
+.wrap {
+  white-space: normal;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.preserve-line {
+  display: inline-block;
+}
+
 button,
 .button {
   font-weight: normal;
-  padding: 12px;
+  padding: 8px;
   border: 4px solid #000;
   border-radius: 10px;
   display: inline-block;
   background: #fff;
   cursor: pointer;
+
+  @media (--width-narrow) {
+    padding: 12px;
+  }
 
   &,
   &:visited {
@@ -49,8 +86,13 @@ button,
   }
 
   &:hover {
-    border-width: 6px;
-    padding: 10px;
+    border-width: 5px;
+    padding: 7px;
+
+    @media (--width-narrow) {
+      border-width: 6px;
+      padding: 10px;
+    }
   }
 
   &.js-keyboard-focus:hover {
@@ -84,6 +126,10 @@ pre {
   margin: 0;
 }
 
+code {
+  white-space: nowrap;
+}
+
 code,
 .code-block {
   font-family: 'Source Code Pro', monospace;
@@ -95,9 +141,21 @@ code,
 }
 
 .code-block {
-  padding: 24px 40px;
+  padding: 12px;
   line-height: 1.4;
   display: inline-block;
+
+  @media (--width-narrow) {
+    padding: 12px;
+  }
+
+  @media (--width-wide) {
+    padding: 24px 40px;
+  }
+}
+
+.code-block-container {
+  overflow-x: auto;
 }
 
 .hidden {
@@ -113,37 +171,108 @@ header {
 }
 
 .header-title {
-  font-size: 160px;
-  margin-top: 120px;
+  font-size: 14vw;
+  margin-top: 60px;
   margin-bottom: 0;
+
+  @media (--width-narrow) {
+    font-size: 11vw;
+    margin-top: 100px;
+  }
+
+  @media (--width-standard) {
+    font-size: 10vw;
+    margin-top: 120px;
+  }
+
+  @media (--width-wide) {
+    font-size: 160px;
+  }
 }
 
 .header-subtitle {
-  font-size: 40px;
-  margin-top: 80px;
+  font-size: 24px;
+  margin-top: 40px;
+
+  @media (--width-narrow) {
+    font-size: 28px;
+    margin-top: 60px;
+  }
+
+  @media (--width-standard) {
+    font-size: 32px;
+  }
+
+  @media (--width-wide) {
+    font-size: 40px;
+    margin-top: 80px;
+  }
 }
 
 .header-link {
-  font-size: 32px;
-  width: 240px;
-  margin: 80px 40px;
+  font-size: 24px;
+  width: 100px;
+  margin: 10px;
+
+  @media (--width-narrow) {
+    width: 160px;
+    margin: 40px 24px;
+  }
+
+  @media (--width-standard) {
+    font-size: 28px;
+    width: 200px;
+    margin: 60px 32px;
+  }
+
+  @media (--width-wide) {
+    font-size: 32px;
+    width: 240px;
+    margin: 80px 40px;
+  }
 }
 
 .header-code-block {
-  max-width: 800px;
-  margin: 24px auto 60px;
+  max-width: 600px;
+  margin: 40px auto;
   display: block;
+
+  @media (--width-narrow) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  @media (--width-standard) {
+    max-width: 800px;
+  }
+
+  @media (--width-wide) {
+    margin-top: 24px;
+    margin-bottom: 60px;
+  }
 }
 
 .announcement-bar {
   display: flex;
+  flex-direction: column;
+
+  @media (--width-standard) {
+    flex-direction: row;
+  }
 }
 
 .announcement {
   background-color: #eee;
-  padding: 24px 40px;
-  font-size: 24px;
+  padding: 0 16px;
   line-height: 1.6;
+
+  @media (--width-narrow) {
+    padding: 8px 24px;
+  }
+
+  @media (--width-wide) {
+    padding: 24px 40px;
+  }
 
   &.announcement-loud {
     background-color: #000;
@@ -152,44 +281,94 @@ header {
 }
 
 .project-description {
-  max-width: 1000px;
-  margin-top: 160px;
+  max-width: 600px;
+  margin-top: 80px;
   text-align: center;
 
+  @media (--width-narrow) {
+    max-width: 1000px;
+    padding: 0 100px;
+    margin-top: 100px;
+  }
+
+  @media (--width-standard) {
+    padding: 0 120px;
+  }
+
+  @media (--width-wide) {
+    padding: 0;
+    margin-top: 160px;
+  }
+
   & h1 {
-    font-size: 60px;
+    font-size: 32px;
     line-height: 1.3;
+
+    @media (--width-narrow) {
+      font-size: 40px;
+    }
+
+    @media (--width-wide) {
+      font-size: 60px;
+    }
   }
 
   & p {
-    font-size: 32px;
+    font-size: 20px;
     line-height: 1.4;
+
+    @media (--width-narrow) {
+      font-size: 24px;
+    }
+
+    @media (--width-wide) {
+      font-size: 32px;
+    }
   }
 }
 
 .docs {
-  margin: 200px auto 0;
+  margin: 120px auto 0;
   position: relative;
   max-width: 2000px;
+
+  @media (--width-wide) {
+    margin-top: 200px;
+  }
 
   &:after {
     @apply --clearfix;
   }
 
   & h2 {
-    padding-top: 120px;
-    margin-top: 120px;
+    padding-top: 60px;
+    margin-top: 60px;
     border-top: 4px solid #000;
+
+    @media (--width-wide) {
+      padding-top: 120px;
+      margin-top: 120px;
+    }
   }
 
   & h3 {
-    padding-top: 40px;
-    margin-top: 40px;
+    padding-top: 30px;
+    margin-top: 30px;
+
+    @media (--width-wide) {
+      padding-top: 40px;
+      margin-top: 40px;
+    }
   }
 
   & h4 {
+    line-height: 2;
     margin-top: 60px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
+
+    &:first-of-type {
+      margin-top: 40px;
+    }
   }
 
   & p,
@@ -199,13 +378,28 @@ header {
 
   & .code-block {
     max-width: 1200px;
+    overflow-x: auto;
   }
 }
 
 .docs-nav {
-  position: absolute;
-  padding: 40px 40px 40px 24px;
   background-color: #fff;
+  margin: var(--container-padding);
+
+  @media (--width-narrow) {
+    position: absolute;
+    width: 22vw;
+    padding: 40px 40px 40px 24px;
+    margin: 0;
+  }
+
+  @media (--width-standard) {
+    width: 280px;
+  }
+
+  @media (--width-wide) {
+    width: auto;
+  }
 
   &.js-sticky-active {
     position: fixed;
@@ -219,19 +413,61 @@ header {
     font-size: 18px;
     font-weight: normal;
     line-height: 1.6;
+    padding: 8px 0;
     text-decoration: none;
     display: block;
+
+    @media (--width-standard) {
+      padding: 0;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+.docs-nav-section {
+  width: 100%;
+  margin: 20px 0;
+
+  @media (--width-x-narrow) {
+    width: 45%;
+    border-top: 4px solid #000;
   }
 
-  & .docs-nav-section {
-    & a:first-of-type {
-      font-size: 20px;
-      font-weight: bold;
-    }
+  @media (--width-narrow) {
+    width: 100%;
+    border-top: 0;
 
-    &:not(:first-of-type) {
-      margin-top: 24px;
+    &:first-of-type {
+      margin-top: 0;
     }
+  }
+
+  & a:first-of-type {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.docs-content,
+.footer {
+  @media (--width-narrow) {
+    margin-left: 22vw;
+    width: calc(100% - 22vw);
+  }
+
+  @media (--width-standard) {
+    margin-left: 280px;
+    width: calc(100% - 280px);
+  }
+
+  @media (--width-x-wide) {
+    margin-left: auto;
+    width: auto;
   }
 }
 
@@ -276,10 +512,17 @@ header {
   background-color: #eee;
 }
 
+.table-container {
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 24px;
+
+  @media (--width-wide) {
+    margin-bottom: 24px;
+  }
 
   & code {
     border: 0;
@@ -295,5 +538,6 @@ td {
 
 footer {
   text-align: center;
+  line-height: 2;
   padding: 80px 0 40px;
 }
