@@ -1,7 +1,7 @@
 {
   "name": "millwright-site",
-  "version": "0.2.7",
-  "description": "Source of the millwright.js website.",
+  "version": "0.3.0",
+  "description": "Source for the millwright.js website.",
   "author": "Shawn Erquhart <shawn@professant.com> (https://github.com/erquhart)",
   "license": "MIT",
   "dependencies": {
