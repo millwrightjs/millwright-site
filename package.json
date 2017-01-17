@@ -9,6 +9,7 @@
     "escape-html": "^1.0.3"
   },
   "devDependencies": {
-    "millwright": "^0.3.1"
+    "millwright": "^0.3.1",
+    "millwright-cli": "^0.3.0"
   }
 }
