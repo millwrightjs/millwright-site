@@ -1,4 +1,9 @@
 :root {
+  --clearfix: {
+    content: '';
+    display: table;
+    clear: both;
+  }
   --container: {
     margin: 0 auto;
     max-width: 1200px;
@@ -163,7 +168,13 @@ header {
 }
 
 .docs {
-  margin-top: 200px;
+  margin: 200px auto 0;
+  position: relative;
+  max-width: 2000px;
+
+  &:after {
+    @apply --clearfix;
+  }
 
   & h2 {
     padding-top: 120px;
@@ -193,28 +204,34 @@ header {
 
 .docs-nav {
   position: absolute;
-  width: 100%;
-  padding-top: 24px;
+  padding: 40px 40px 40px 24px;
+  background-color: #fff;
 
   &.js-sticky-active {
     position: fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
     top: 0;
-  }
-
-  & .wrapper {
-    display: inline-block;
-  }
-
-  & ul {
-    padding-right: 120px;
-    margin-left: -100%;
-    list-style-type: none;
-    padding-left: 0;
+    bottom: 0;
   }
 
   & a {
+    font-size: 18px;
     font-weight: normal;
+    line-height: 1.6;
     text-decoration: none;
+    display: block;
+  }
+
+  & .docs-nav-section {
+    & a:first-of-type {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: 24px;
+    }
   }
 }
 

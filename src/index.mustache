@@ -45,8 +45,8 @@
   <section class="container project-description">
     <h1>Stop configuring your build tool and start writing code.</h1>
     <p>
-      Millwright's big idea is simple: building code (transforming authored code into production
-      ready code) shouldn't be something that we have to think about.
+      Millwright's big idea is simple: a build process shouldn't be something we have to think
+      about.
     </p>
     <p>
       <strong>We're starting with static site generation.</strong> It transpiles pre-processor and
@@ -57,1525 +57,1563 @@
   </section>
   <section id="docs" class="docs">
 
-    <nav class="docs-nav js-sticky">
-      <div class="container">
-        <div class="wrapper">
-          <ul>
-            <li><a href="#getting-started">Getting Started</a></li>
-            <li><a href="#installation">Installation</a></li>
-            <li><a href="#commands">Commands</a></li>
-          </ul>
-        </div>
-      </div>
+    <nav class="docs-nav js-sticky" aria-label="Documentation shortcuts">
+
+      <section class="docs-nav-section">
+        <a href="#getting-started">Getting Started</a>
+        <a href="#installation">Installation</a>
+        <a href="#commands">Commands</a>
+        <a href="#usage">Usage</a>
+      </section>
+
+      <section class="docs-nav-section">
+        <a href="#templates">Templates</a>
+        <a href="#template-tags">Tags</a>
+        <a href="#template-variables">Variables</a>
+        <a href="#wrappers">Wrappers</a>
+        <a href="#partials">Partials</a>
+        <a href="#lambdas">Lambdas</a>
+      </section>
+
+      <section class="docs-nav-section">
+        <a href="#assets">Assets</a>
+        <a href="#including-assets">Including Assets</a>
+        <a href="#transpiling">Transpiling</a>
+        <a href="#url-assets">URL Assets</a>
+        <a href="#sourcemaps">Sourcemaps</a>
+      </section>
+
+
+      <section class="docs-nav-section">
+        <a href="#local-development">Local Development</a>
+        <a href="#serving-locally">Serving Locally</a>
+        <a href="#watching-files">Watching Files</a>
+      </section>
+
+      <section class="docs-nav-section">
+        <a href="#production-builds">Production Builds</a>
+        <a href="#minification">Minification</a>
+        <a href="#concatenation">Concatenation</a>
+      </section>
+
+      <section class="docs-nav-section">
+        <a href="#options">Options</a>
+      </section>
+
     </nav>
 
-    <section>
-      <div class="container">
-        <h2 id="getting-started">
-          <a class="docs-section-link" href="#getting-started">Getting started</a>
-        </h2>
-        <p>
-          This guide assumes that you know how to install and save npm packages to your project. If
-          that's not you, we recommend checking out
-          <a href="https://docs.npmjs.com/getting-started/what-is-npm">their docs</a>
-          to get going.
-        </p>
-      </div>
-    </section>
+    <div class="docs-content">
 
-    <section>
-      <div class="container">
-        <h3 id="installation">
-          <a class="docs-section-link" href="#installation">Installation</a>
-        </h3>
-        <p>
-          Millwright requires two packages - a global package, which allows you to use the
-          <code>mill</code> command, and a local package, which is installed
-          per-project.
-        </p>
-        <p>
-          To install the global package, run <code>npm install millwright-cli -g</code>.  Then, from
-          inside your project directory, install the local package by running
-          <code>npm install millwright --save-dev</code>.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="commands">
-          <a class="docs-section-link" href="#commands">Commands</a>
-        </h3>
-        <p>
-          Millwright currently utilizes a handful of commands centered around static site
-          generation:
-        </p>
-        <p>
-          <code>mill</code>
-          - alias for <code>mill dev</code>
-        </p>
-        <p>
-          <code>mill make</code>
-          - generates a development build with no optimization
-        </p>
-        <p>
-          <code>mill build</code>
-          - generates an optimized build for production use
-        </p>
-        <p>
-          <code>mill dev</code>
-          - same as <code>mill make</code>, but serves locally and watches for changes.
-        </p>
-        <p>
-          <code>mill preview</code>
-          - same as <code>mill build</code>, but serves locally. Does not watch for changes.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2 id="usage">
-          <a class="docs-section-link" href="#usage">Usage</a>
-        </h2>
-        <p>
-          Because of Millwright's zero configuration approach, usage documentation is less concerned
-          with how to setup and run the tool, and is instead focused on how your project can take
-          advantage of what Millwright does automatically.
-        </p>
-        <p>
-          Millwright requires a <code>src</code> directory (name can be changed via
-          <a href="#options">options</a>). By default, everything in the <code>src</code> directory
-          is simply copied to the <code>dest</code> directory (except for templates, more on that
-          soon). This means that simple sites or apps that don't use a build tool can begin using
-          Millwright incrementally.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
+      <section>
         <div class="container">
-          <button class="docs-example-toggle">Show example</button>
+          <h2 id="getting-started">
+            <a class="docs-section-link" href="#getting-started">Getting started</a>
+          </h2>
+          <p>
+            This guide assumes that you know how to install and save npm packages to your project.
+            If that's not you, we recommend checking out
+            <a href="https://docs.npmjs.com/getting-started/what-is-npm">their docs</a>
+            to get going.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="installation">
+            <a class="docs-section-link" href="#installation">Installation</a>
+          </h3>
+          <p>
+            Millwright requires two packages - a global package, which allows you to use the
+            <code>mill</code> command, and a local package, which is installed
+            per-project.
+          </p>
+          <p>
+            To install the global package, run <code>npm install millwright-cli -g</code>.  Then,
+            from inside your project directory, install the local package by running
+            <code>npm install millwright --save-dev</code>.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="commands">
+            <a class="docs-section-link" href="#commands">Commands</a>
+          </h3>
+          <p>
+            Millwright currently utilizes a handful of commands centered around static site
+            generation:
+          </p>
+          <p>
+            <code>mill</code>
+            - alias for <code>mill dev</code>
+          </p>
+          <p>
+            <code>mill make</code>
+            - generates a development build with no optimization
+          </p>
+          <p>
+            <code>mill build</code>
+            - generates an optimized build for production use
+          </p>
+          <p>
+            <code>mill dev</code>
+            - same as <code>mill make</code>, but serves locally and watches for changes.
+          </p>
+          <p>
+            <code>mill preview</code>
+            - same as <code>mill build</code>, but serves locally. Does not watch for changes.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="usage">
+            <a class="docs-section-link" href="#usage">Usage</a>
+          </h3>
+          <p>
+            Because of Millwright's zero configuration approach, usage documentation is less
+            concerned with how to setup and run the tool, and is instead focused on how your project
+            can take advantage of what Millwright does automatically.
+          </p>
+          <p>
+            Millwright requires a <code>src</code> directory (name can be changed via
+            <a href="#options">options</a>). By default, everything in the <code>src</code>
+            directory is simply copied to the <code>dest</code> directory (except for templates,
+            more on that soon). This means that simple sites or apps that don't use a build tool can
+            begin using Millwright incrementally.
+          </p>
         </div>
 
-        <div class="docs-example-content">
+        <div class="docs-example">
+
           <div class="container">
-            <h4>file structure (before)</h4>
-            <div class="code-block">
-<pre>
-└─ src
-    ├─ index.html
-    ├─ about.html
-    ├─ styles.css
-    └─ more-pages
-        ├─ index.html
-        ├─ another-page.html
-        ├─ scripts.js
-        └─ styles.css
-</pre>
-            </div>
-
-            <p>
-              Given the file structure above, running <code>mill make</code> would produce this:
-            </p>
-
-            <h4>file structure (after)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ about.html
-|   ├─ index.html
-|   ├─ styles.css
-|   └─ more-pages
-|       ├─ index.html
-|       ├─ another-page.html
-|       ├─ scripts.js
-|       └─ styles.css
-└─ dest
-    ├─ about.html
-    ├─ index.html
-    ├─ styles.css
-    └─ more-pages
-        ├─ index.html
-        ├─ another-page.html
-        ├─ scripts.js
-        └─ styles.css
-</pre>
-            </div>
-
-            <p>
-              The files haven't been changed at all, just copied to a new <code>dest</code>
-              directory. This directory would then serve as the web root for the project. In
-              subsequent sections we'll look at the different things Millwright can do for static
-              sites and apps.
-            </p>
-            <p>
-              <strong>Note:</strong> any supported template files (currently just mustache) will
-              always be compiled to html when running a <code>mill</code> command.
-            </p>
+            <button class="docs-example-toggle">Show example</button>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="container">
-        <h2 id="templates">
-          <a class="docs-section-link" href="#templates">Templates</a>
-        </h2>
-        <p>
-          Templates are html files with superpowers. When Millwright compiles a template, the output
-          will be an html file. Millwright currently supports
-          <a href="https://mustache.github.io/mustache.5.html">mustache</a>
-          templates, with other options coming soon.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="tags">
-          <a class="docs-section-link" href="#tags">Tags</a>
-        </h3>
-        <p>
-          Templating languages utilize special tags, which the templating library looks for when
-          processing a file. Mustache uses double curly braces <code>{{ }}</code> as tags by
-          default, but this tends to conflict with commonly used front end frameworks like Angular.
-          For this reason, the default template tags for Millwright include a bracket in between the
-          double curlies <code>{[{#lambdas.escape}]}{[{ }]}{[{/lambdas.escape}]}</code>, effectively
-          sidestepping this issue.
-        </p>
-        <p>
-          The default tags can be changed if desired - check out <a href="#options">options</a> for
-          more info.
-        </p>
-      <div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="variables">
-          <a class="docs-section-link" href="#variables">Variables</a>
-        </h3>
-        <p>
-          Variables are the references provided by template tags, which are parsed during
-          compilation.  When a template variable is encountered, Millwright will look for a the
-          associated value in the <code>json</code> file with the same name as the template.
-          Variables found in <code>src/example.mustache</code> would be checked against
-          <code>src/example.json</code>, if it exists. If the value is unavailable for some reason,
-          Millwright will fall back to the <code>json</code> file associated with whatever
-          <a href="#wrapper">wrapper</a> is being used by the template. If no value is found, the
-          tag will simply be removed from the template.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill make</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   └─ index.json
-└─ dest
-    └─ index.html
-</pre>
-            </div>
-
-            <h4>src/index.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "page-title": "Example Website",
-  "example-content": "This is example content from src/index.json."
-  "some-list-items": [
-    {"item": "Item 1"},
-    {"item": "Item 2"},
-    {"item": "Item 3"}
-  ],
-  "more-list-items": [
-    "Item 4",
-    "Item 5",
-    "Item 6"
-  ]
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<head>
-  <title>{[{page-title}]}</title>
-</head>
-<body>
-  <p>{[{example-content}]}</p>
-
-  <ul>
-    {[{#some-list-items}]}
-      <li>{[{item}]}</li>
-    {[{/some-list-items}]}
-  </ul>
-
-  <ol>
-    {[{#more-list-items}]}
-      <li>{[{.}]}</li>
-    {[{/more-list-items}]}
-  </ol>
-</body>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<head>
-  <title>Example Website</title>
-</head>
-<body>
-  <p>This is example content from src/index.json.</p>
-
-  <ul>
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-  </ul>
-
-  <ol>
-    <li>Item 4</li>
-    <li>Item 5</li>
-    <li>Item 6</li>
-  </ol>
-</body>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="container">
-        <h3 id="wrappers">
-          <a class="docs-section-link" href="#wrappers">Wrappers</a>
-        </h3>
-        <p>
-          Most sites and apps have a common header and footer that are used sitewide. Millwright
-          uses a "wrapper" concept to allow this kind of global markup to be kept in a single file.
-          If a wrapper template, eg. <code>wrapper.mustache</code> is found in the <code>src</code>
-          directory, all templates in that directory (including nested directories) will be injected
-          into the wrapper template as a partial, using the reserved <code>page</code> variable.
-        </p>
-        <p>
-          Wrappers may also be nested. A template will use the nearest wrapper, starting from it's
-          own directory, and then checking each parent directory until <code>src</code>.
-        </p>
-        <p>
-          Finally, note that wrappers are entirely optional. If no wrapper is found for a template,
-          the template will be compiled as is.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill make</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   ├─ extra.mustache
-|   ├─ wrapper.mustache
-|   ├─ nested-with-wrapper
-|   |   ├─ index.mustache
-|   |   └─ wrapper.mustache
-|   └─ nested-without-wrapper
-|       └─ index.mustache
-└─ dest
-    ├─ index.html
-    ├─ extra.html
-    ├─ nested-with-wrapper
-    |   └─ index.html
-    └─ nested-without-wrapper
-        └─ index.html
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/extra.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/extra.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/wrapper.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/wrapper.mustache</h1>
-
-{[{> page}]}
-
-<p>Footer from src/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-with-wrapper/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested-with-wrapper/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-with-wrapper/wrapper.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
-
-{[{> page}]}
-
-<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-without-wrapper/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested-without-wrapper/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/wrapper.mustache</h1>
-
-<p>Content from src/index.mustache</p>
-
-<p>Footer from src/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/extra.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/wrapper.mustache</h1>
-
-<p>Content from src/extra.mustache</p>
-
-<p>Footer from src/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/nested-with-wrapper/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
-
-<p>Content from src/nested-with-wrapper/index.mustache</p>
-
-<p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/nested-without-wrapper/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<h1>Header from src/wrapper.mustache</h1>
-
-<p>Content from src/nested-without-wrapper/index.mustache</p>
-
-<p>Footer from src/wrapper.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="container">
-        <h3 id="partials">
-          <a class="docs-section-link" href="#partials">Partials</a>
-        </h3>
-        <p>
-          Partials are templates that can be included within other templates. In mustache, partial
-          tags are denoted by the greater-than symbol, eg.
-          <code>{[{#lambdas.escape}]}{[{> partial-name}]}{[{/lambdas.escape}]}</code>.  Millwright
-          will look for partials in the <code>src/partials</code> directory, using the filename sans
-          extension. For example,
-          <code>{[{#lambdas.escape}]}{[{> my-partial}]}{[{/lambdas.escape}]}</code> will yield the
-          contents of <code>src/partials/my-partial.mustache</code>.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill make</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   ├─ nested
-|   |   └─ index.mustache
-|   └─ partials
-|       └─ content.mustache
-└─ dest
-    ├─ index.html
-    └─ nested
-        └─ index.html
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/index.mustache</p>
-
-{[{> content}]}
-{[{/lambdas.escape}]}
-</pre>
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (before)</h4>
+              <div class="code-block">
+  <pre>
+  └─ src
+      ├─ index.html
+      ├─ about.html
+      ├─ styles.css
+      └─ more-pages
+          ├─ index.html
+          ├─ another-page.html
+          ├─ scripts.js
+          └─ styles.css
+  </pre>
               </div>
 
-              <h4>src/nested/index.mustache</h4>
+              <p>
+                Given the file structure above, running <code>mill make</code> would produce this:
+              </p>
+
+              <h4>file structure (after)</h4>
               <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested/index.mustache</p>
-
-{[{> content}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/partials/content.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/partials/content.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/index.mustache</p>
-
-<p>Content from src/partials/content.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/nested/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested/index.mustache</p>
-
-<p>Content from src/partials/content.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="container">
-        <h3 id="lambdas">
-          <a class="docs-section-link" href="#lambdas">Lambdas</a>
-        </h3>
-        <p>
-          Lambdas are JavaScript functions that you can write and use to implement custom processing
-          for parts of your template. Some templating languages call their version of this
-          "helpers".  Millwright looks for lambdas in the <code>src/lambdas</code> directory. Unlike
-          partials, lambdas don't have a special tag in mustache (instead the list tag
-          <code>{[{#lambdas.escape}]}{[{#...}]}{[{/...}]}{[{/lambdas.escape}]}</code> is used), so
-          the lambda file name must be prefixed with "lambdas", eg.
-          <code>
-            {[{#lambdas.escape}]}
-              {[{#lambdas.my-lambda}]}...{[{/lambdas.my-lambda}]}
-            {[{/lambdas.escape}]}
-          </code>.
-        </p>
-        <p> To allow maximum potential for this feature, each lambda is expected to be a node
-          module.  This means that lambdas can do anything that node modules can do, like requiring
-          other modules that you've installed to your project.
-        </p>
-        <p>
-          Note that lambda node modules must export an object containing a reference to
-          <code>module</code> itself, as well as the lambda function. This is because Millwright
-          will use your <code>module</code> reference to <code>require</code> your lambda, so that
-          modules required by your lambda are
-          resolved correctly.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill make</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   └─ lambdas
-|       └─ escape.mustache
-└─ dest
-    └─ index.html
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<pre>
-{[{#lambdas.escape}]}
-<p>
-  This paragraph is meant to be displayed as code, with tags included, so it
-  has to be html escaped.
-</p>
-{[{/lambdas.escape}]}
-<pre>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/lambdas/escape.js</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-const escape = require('escape-html');
-
-module.exports = {module: module, lambda: lambda};
-
- pfunction lambda(template) {
-  return escape(template).trim();
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-&lt;p&gt;
-  This paragraph is meant to be displayed as code, with tags included, so it
-  has to be html escaped.
-&lt;/p&gt;
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2 id="assets">
-          <a class="docs-section-link" href="#assets">Assets</a>
-        </h2>
-
-        <p>
-          Millwright's asset handling currently includes JavaScript and CSS files only.
-        </p>
-        <p>
-          Configuring build tools to process these files typically takes the most time when starting
-          a new project - Millwright is meant to give this time back to the developer by only
-          requiring paths to the assets. Everything else is handled without further input, including
-          transpiling, sourcemapping, and optimization for production builds.
-        <p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="including-assets">
-          <a class="docs-section-link" href="#including-assets">Including Assets</a>
-        </h3>
-
-        <p>
-          Millwright looks for asset paths in a project's <code>json</code> files, under the
-          reserved <code>assets</code> property. This property's value should be an object composed
-          of arrays of asset paths relative to the <code>json</code> file. As template data goes,
-          these assets will be available to templates just as expected, except the path that is
-          output for each asset will be absolute from site/app root in the <code>dest</code>
-          directory.
-        </p>
-        <p>
-          It helps to think of the asset values provided in template data (<code>json</code>) files
-          as simple variable values. The data structure in use is valid for mustache, and the values
-          are output just like any other template data value. Millwright simply siphons information
-          from these asset objects to determine what assets your project is using and which
-          templates require them.
-        </p>
-        <p>
-          Lastly, because assets objects are just like any other template data value, the assets
-          provided will be made available to templates just like data values. So assets provided to
-          a <code>wrapper</code> template will be used in all templates that use that wrapper.
-          Likewise, if assets are specified in the template data file of a specific template, eg.
-          <code>index.json</code>, then those assets will be loaded especially for that file.
-        </p>
-        <p>
-          The same asset can be specified for as many templates as necessary, and Millwright will
-          continue to improve how smart it is about reusing assets in production builds.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill make</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   ├─ extra.mustache
-|   ├─ extra.json
-|   ├─ wrapper.mustache
-|   ├─ wrapper.json
-|   ├─ styles.css
-|   ├─ random-directory
-|   |   └─ do-things.js
-|   ├─ nested-with-wrapper
-|   |   ├─ index.mustache
-|   |   ├─ wrapper.mustache
-|   |   ├─ wrapper.json
-|   |   └─ more-styles.css
-|   └─ nested-without-wrapper
-|       ├─ index.mustache
-|       └─ index.json
-└─ dest
-    ├─ index.html
-    ├─ extra.html
-    ├─ styles.css
-    ├─ random-directory
-    |   └─ do-things.js
-    ├─ nested-with-wrapper
-    |   ├─ index.html
-    |   └─ more-styles.css
-    └─ nested-without-wrapper
-        └─ index.html
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/extra.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/extra.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/extra.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "styles": [
-      "../node_modules/module-with-styles/styles.css"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/wrapper.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{[{#assets.styles}]}
-  <link href="{[{.}]}" rel="stylesheet">
-{[{/assets.styles}]}
-
-{[{#assets.scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.scripts}]}
-
-{[{> page}]}
-
-{[{#assets.some-more-scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.some-more-scripts}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/wrapper.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "styles": [
-      "styles.css",
-    ],
-    "scripts": [
-      "../node_modules/some-module/script.js"
-    ],
-    "some-more-scripts": [
-      "../bower_components/some-package/another-script.js",
-      "random-directory/do-things.js"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-with-wrapper/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested-with-wrapper/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-with-wrapper/wrapper.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{[{#assets.random-name}]}
-  <link href="{[{.}]}" rel="stylesheet">
-{[{/assets.random-name}]}
-
-{[{> page}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-with-wrapper/wrapper.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "random-name": [
-      "more-styles.css"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/nested-without-wrapper/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/nested-without-wrapper/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="/styles.css" rel="stylesheet">
-
-<script src="/some-module/script.js"></script>
-
-<p>Content from src/index.mustache</p>
-
-<script src="/some-package/another-script.js"></script>
-<script src="/random-directory/do-things.js"></script>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/extra.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="/styles.css" rel="stylesheet">
-<link href="/module-with-styles/styles.css" rel="stylesheet">
-
-<script src="/some-module/script.js"></script>
-
-<p>Content from src/extra.mustache</p>
-
-<script src="/some-package/another-script.js"></script>
-<script src="/random-directory/do-things.js"></script>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/nested-with-wrapper/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="awesome-styles.css" rel="stylesheet">
-
-<p>Content from src/nested-with-wrapper/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/nested-without-wrapper/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="/styles.css" rel="stylesheet">
-
-<script src="/some-module/script.js"></script>
-
-<p>Content from src/nested-without-wrapper/index.mustache</p>
-
-<script src="/some-package/another-script.js"></script>
-<script src="/random-directory/do-things.js"></script>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="transpiling">
-          <a class="docs-section-link" href="#transpiling">Transpiling</a>
-        </h3>
-
-        <p>
-          Millwright can transpile code written in these JavaScript and CSS preprocessors languages:
-        </p>
-
-        <ul>
-          <li><a href="https://babeljs.io/learn-es2015/">ES6/ES2015</a></li>
-          <li><a href="http://coffeescript.org/">CoffeeScript</a></li>
-          <li><a href="http://cssnext.io/">CSSNext</a></li>
-          <li><a href="http://sass-lang.com/">Sass</a></li>
-          <li><a href="http://lesscss.org/">Less</a></li>
-          <li><a href="http://stylus-lang.com/">Stylus</a></li>
-        </ul>
-
-        <p>
-          Using preprocessor files works the same as with standard js/css files, just provide a path
-          to the asset source in a template data file (see <a href="#including-assets">Including
-          Assets</a> for more info). Files can be named however you like, Millwright only reads the
-          file extension to determine type.
-        </p>
-
-        <p>
-          Note that Millwright always runs plain JavaScript and CSS files through the ES2015 and
-          CSSNext preprocessors, respectively. This may or may not be the best route, but results
-          have been great so far. Your feedback is appreciated via Github issues.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure</h4>
-            <div class="code-block">
-<pre>
-└─ src
-    ├─ index.mustache
-    ├─ index.json
-    ├─ some-es6.js
-    ├─ coffeescript.coffee
-    ├─ styles-in-cssnext.css
-    ├─ sass.scss
-    ├─ imports-work-too.scss
-    ├─ less.less
-    └─ stylus.styl
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{[{#assets.styles}]}
-  <link href="{[{.}]}" rel="stylesheet">
-{[{/assets.styles}]}
-
-{[{#assets.scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.scripts}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/index.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "scripts": [
-      "some-es6.js",
-      "coffeescript.coffee"
-    ],
-    "styles": [
-      "styles-in-cssnext.css",
-      "sass.scss",
-      "less.less",
-      "stylus.styl"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="url-assets">
-          <a class="docs-section-link" href="#url-assets">URL Assets</a>
-        </h3>
-
-        <p>
-          Assets that are fetched via URL can be used by providing the complete url (including
-          protocol) to a template data file.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure</h4>
-            <div class="code-block">
-<pre>
-└─ src
-    ├─ index.mustache
-    └─ index.json
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{[{#assets.scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.scripts}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/index.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "scripts": [
-      "https://unpkg.com/lodash@4.17.4"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            <div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="sourcemaps">
-          <a class="docs-section-link" href="#sourcemaps">Sourcemaps</a>
-        </h3>
-        <p>
-          Sourcemaps allow you to interact with your original source files in browser development
-          tools instead of the transpiled/minified/concatenated files that the browser is actually
-          using.
-        </p>
-        <p>
-          Millwright places both sourcemaps and source files in the <code>sourcemaps</code>
-          directory in your project's web root. You can set breakpoints in the JavaScript source
-          files there, and style rule references will automatically map to source files as well.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2 id="local-development">
-          <a class="docs-section-link" href="#local-development">Local Development</a>
-        </h2>
-
-        <p>
-          Millwright currently provides two kinds of commands: development and production. The
-          development commands don't minify or concatenate your js/css, and provide file watching
-          when the local server is running, along with automatically injecting changed code or
-          reloading the page when appropriate.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="serving-locally">
-          <a class="docs-section-link" href="#serving-locally">Serving Locally</a>
-        </h3>
-        <p>
-          To serve files locally, you can run either the <code>mill dev</code> command, for a
-          non-optimized build, ideal for development or the <code class="command">mill
-          preview</code> command, which produces and serves a production build, generally for
-          testing purposes.
-        </p>
-        <p>
-          Millwright currently uses <a href="https://www.browsersync.io/">Browsersync</a> for
-          serving locally, but we're aware that some users may not be able to use it. Windows users,
-          specifically, could run into issues. We want to address this potential issue based on
-          developer feedback, so please open or comment on GitHub issues if serving locally isn't
-          working for you.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="watching-files">
-          <a class="docs-section-link" href="#watching-files">Watching Files</a>
-        </h3>
-        <p>
-          Millwright will watch everything in a project's <code>src</code> directory for changes. In
-          addition, files outside of source that are referenced as assets, such as node modules and
-          bower components, will be watched as individual files. When a file changes, Millwright
-          will re-run whatever portion of the build is necessary for the specific file or files that
-          changed.
-        </p>
-        <p>
-          After a watched file changes and the partial build process runs, any connected browsers
-          will be updated. If the changed file is a CSS or CSS preprocessor file, the any related
-          CSS files will be rebuilt and injected to the page, without requiring a reload. For any
-          other changes, the page will be reloaded.
-        <p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2 id="production-builds">
-          <a class="docs-section-link" href="#production-builds">Production Builds</a>
-        </h2>
-
-        <p>
-          Millwright provides production builds using the <code>mill build</code> command.
-          Currently, that includes minifying and concatenating assets, but Millwright can do much
-          more in the future with little or no changes to how you use it. Things like bundling and
-          tree shaking are on our radar.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="minification">
-          <a class="docs-section-link" href="#minification">Minification</a>
-        </h3>
-        <p>
-          JavaScript and CSS assets are minified individually when running <code>mill build</code>.
-          If your file is already minified (ends with <code>.min.js</code> or <code>.min.css</code>,
-          Millwright won't attempt to minify it. If a minified file is found in the same directory
-          as your source file, which is often the case with node modules or bower components,
-          Millwright will just use that instead.
-        </p>
-        <p>
-          When minifying assets, Millwright will also provide sourcemaps, and previous sourcemaps
-          from any transpiling will be passed through as well. See
-          <a href="#sourcemaps">Sourcemaps</a> for more info.
-        <p>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h3 id="concatenation">
-          <a class="docs-section-link" href="#concatenation">Concatenation</a>
-        </h3>
-        <p>
-          Concatenation is an optimization step where multiple files are combined into one so that
-          the browser makes less requests. For those who are able to use HTTP/2 for your project and
-          don't want concatenation, an option is expected for that soon.
-        </p>
-        <p>
-          When concatenating files, the resulting file is named based on the key used in the
-          relevant template data (<code>json</code>) file. For template data files that handle a
-          specific page, the page name is also used to avoid file naming collisions. If a page uses
-          a wrapper with assets, the wrapper assets and page specific assets will be provided in
-          separate files, so that the single wrapper script can be reused by all consumers.
-        </p>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure (after running <code>mill build</code>)</h4>
-            <div class="code-block">
-<pre>
-├─ src
-|   ├─ index.mustache
-|   ├─ extra.mustache
-|   ├─ extra.json
-|   ├─ wrapper.mustache
-|   ├─ wrapper.json
-|   ├─ scripts.js
-|   ├─ more-scripts.js
-|   ├─ styles.css
-|   ├─ more-styles.css
-|   └─ random-directory
-|       └─ do-things.js
-└─ dest
-    ├─ index.html
-    ├─ extra.html
-    ├─ scripts.min.js
-    ├─ styles.min.css
-    ├─ extra-styles.min.css
-    └─ extra-scripts.min.js
-</pre>
-            </div>
-
-            <h4>src/index.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/index.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/extra.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<p>Content from src/extra.mustache</p>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/extra.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "styles": [
-      "../node_modules/module-with-styles/styles.css"
-    ],
-    "scripts": [
-      "random-directory/do-things.js"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/wrapper.mustache</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{[{#assets.styles}]}
-  <link href="{[{.}]}" rel="stylesheet">
-{[{/assets.styles}]}
-
-{[{#assets.scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.scripts}]}
-
-{[{> page}]}
-
-{[{#assets.some-more-scripts}]}
-  <script src="{[{.}]}"></script>
-{[{/assets.some-more-scripts}]}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>src/wrapper.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "assets": {
-    "styles": [
-      "styles.css",
-      "more-styles.css
-    ],
-    "scripts": [
-      "../node_modules/some-module/script.js",
-      "scripts.js",
-      "more-scripts.js"
-    ],
-    "some-more-scripts": [
-      "../bower_components/some-package/another-script.js"
-    ]
-  }
-}
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/index.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="/styles.min.css" rel="stylesheet">
-
-<script src="/scripts.min.js"></script>
-
-<p>Content from src/index.mustache</p>
-
-<script src="/some-more-scripts.min.js"></script>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-
-            <h4>dest/extra.html</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-<link href="/styles.min.css" rel="stylesheet">
-<link href="/extra-styles.min.css" rel="stylesheet">
-
-<script src="/extra-scripts.min.js"></script>
-
-<p>Content from src/extra.mustache</p>
-
-<script src="/some-more-scripts.min.js"></script>
-{[{/lambdas.escape}]}
-</pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="container">
-        <h2 id="options">
-          <a class="docs-section-link" href="#options">Options</a>
-        </h2>
-        <p>
-          Millwright is designed to work without any tool configuration whatsoever, but if the
-          defaults don't work for some reason, options can be set via <code>millwright.json</code>.
-          <strong>This is a completely optional file.</strong> It should be added to the root of
-          your project (alongside <code>package.json</code>) when used.
-        </p>
-        <p>
-          Here are the available options:
-        </p>
-
-        <table>
-          <tr>
-            <th scope="col">Option</th>
-            <th scope="col">Default</th>
-            <th scope="col">Description</th>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>defaultCommand</code></th>
-            <td><code>'dev'</code></td>
-            <td>Command used when running <code>mill</code></td>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>srcDir</code></th>
-            <td><code>'src'</code></td>
-            <td>Name of source directory</td>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>destDir</code></th>
-            <td><code>'dest'</code></td>
-            <td>Name of output directory</td>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>partialsDir</code></th>
-            <td><code>'partials'</code></td>
-            <td>Name of partials directory</td>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>lambdasDir</code></th>
-            <td><code>'lambdas'</code></td>
-            <td>Name of lambdas directory</td>
-          </tr>
-
-          <tr>
-            <th scope="row"><code>assetIgnoredBasePaths</code></th>
-            <td>
-              <code>
   <pre>
-  [
-    (srcDir),
-    'bower_components',
-    'node_modules'
-  ]
+  ├─ src
+  |   ├─ about.html
+  |   ├─ index.html
+  |   ├─ styles.css
+  |   └─ more-pages
+  |       ├─ index.html
+  |       ├─ another-page.html
+  |       ├─ scripts.js
+  |       └─ styles.css
+  └─ dest
+      ├─ about.html
+      ├─ index.html
+      ├─ styles.css
+      └─ more-pages
+          ├─ index.html
+          ├─ another-page.html
+          ├─ scripts.js
+          └─ styles.css
   </pre>
-                </code>
-              </td>
-            <td>
-              Path segments to remove when creating dest paths for assets
-              (eg. node_modules/lib/script.js -> dest/lib/script.js). Must be an array of strings.
-              Setting this option will replace the entire default array.
-            </td>
-          </tr>
+              </div>
 
-          <tr>
-            <th scope="row"><code>templateTags</code></th>
-            <td><code>{[{#lambdas.escape}]}['{[{', '}]}']{[{/lambdas.escape}]}</code></td>
-            <td>
-              Delimiter tags used in templates, must be an array of two strings, with the opening
-              and closing tags in order.
-            </td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="docs-example">
-
-        <div class="container">
-          <button class="docs-example-toggle">Show example</button>
-        </div>
-
-        <div class="docs-example-content">
-          <div class="container">
-            <h4>file structure</h4>
-            <div class="code-block">
-<pre>
-├─ src
-└─ millwright.json
-</pre>
-            </div>
-
-            <h4>src/millwright.json</h4>
-            <div class="code-block">
-<pre>
-{[{#lambdas.escape}]}
-{
-  "defaultCommand": "dev",
-  "srcDir": "src",
-  "destDir": "dest",
-  "partialsDir": "partials",
-  "lambdasDir": "lambdas",
-  "assetIgnoredBasePaths: [
-    "src",
-    "bower_components",
-    "node_modules"
-  ],
-  templateTags: [
-    "{[{",
-    "}]}"
-  ]
-}
-{[{/lambdas.escape}]}
-</pre>
+              <p>
+                The files haven't been changed at all, just copied to a new <code>dest</code>
+                directory. This directory would then serve as the web root for the project. In
+                subsequent sections we'll look at the different things Millwright can do for static
+                sites and apps.
+              </p>
+              <p>
+                <strong>Note:</strong> any supported template files (currently just mustache) will
+                always be compiled to html when running a <code>mill</code> command.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 id="templates">
+            <a class="docs-section-link" href="#templates">Templates</a>
+          </h2>
+          <p>
+            Templates are html files with superpowers. When Millwright compiles a template, the
+            output will be an html file. Millwright currently supports
+            <a href="https://mustache.github.io/mustache.5.html">mustache</a>
+            templates, with other options coming soon.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="template-tags">
+            <a class="docs-section-link" href="#template-tags">Tags</a>
+          </h3>
+          <p>
+            Templating languages utilize special tags, which the templating library looks for when
+            processing a file. Mustache uses double curly braces <code>{{ }}</code> as tags by
+            default, but this tends to conflict with commonly used front end frameworks like
+            Angular.  For this reason, the default template tags for Millwright include a bracket in
+            between the double curlies
+            <code>{[{#lambdas.escape}]}{[{ }]}{[{/lambdas.escape}]}</code>, effectively
+            sidestepping this issue.
+          </p>
+          <p>
+            The default tags can be changed if desired - check out <a href="#options">options</a>
+            for more info.
+          </p>
+        <div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="template-variables">
+            <a class="docs-section-link" href="#template-variables">Variables</a>
+          </h3>
+          <p>
+            Variables are the references provided by template tags, which are parsed during
+            compilation.  When a template variable is encountered, Millwright will look for a the
+            associated value in the <code>json</code> file with the same name as the template.
+            Variables found in <code>src/example.mustache</code> would be checked against
+            <code>src/example.json</code>, if it exists. If the value is unavailable for some
+            reason, Millwright will fall back to the <code>json</code> file associated with whatever
+            <a href="#wrappers">wrapper</a> is being used by the template. If no value is found, the
+            tag will simply be removed from the template.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill make</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   └─ index.json
+  └─ dest
+      └─ index.html
+  </pre>
+              </div>
+
+              <h4>src/index.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "page-title": "Example Website",
+    "example-content": "This is example content from src/index.json."
+    "some-list-items": [
+      {"item": "Item 1"},
+      {"item": "Item 2"},
+      {"item": "Item 3"}
+    ],
+    "more-list-items": [
+      "Item 4",
+      "Item 5",
+      "Item 6"
+    ]
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <head>
+    <title>{[{page-title}]}</title>
+  </head>
+  <body>
+    <p>{[{example-content}]}</p>
+
+    <ul>
+      {[{#some-list-items}]}
+        <li>{[{item}]}</li>
+      {[{/some-list-items}]}
+    </ul>
+
+    <ol>
+      {[{#more-list-items}]}
+        <li>{[{.}]}</li>
+      {[{/more-list-items}]}
+    </ol>
+  </body>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <head>
+    <title>Example Website</title>
+  </head>
+  <body>
+    <p>This is example content from src/index.json.</p>
+
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+
+    <ol>
+      <li>Item 4</li>
+      <li>Item 5</li>
+      <li>Item 6</li>
+    </ol>
+  </body>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <div class="container">
+          <h3 id="wrappers">
+            <a class="docs-section-link" href="#wrappers">Wrappers</a>
+          </h3>
+          <p>
+            Most sites and apps have a common header and footer that are used sitewide. Millwright
+            uses a "wrapper" concept to allow this kind of global markup to be kept in a single
+            file.  If a wrapper template, eg. <code>wrapper.mustache</code> is found in the
+            <code>src</code> directory, all templates in that directory (including nested
+            directories) will be injected into the wrapper template as a partial, using the reserved
+            <code>page</code> variable.
+          </p>
+          <p>
+            Wrappers may also be nested. A template will use the nearest wrapper, starting from it's
+            own directory, and then checking each parent directory until <code>src</code>.
+          </p>
+          <p>
+            Finally, note that wrappers are entirely optional. If no wrapper is found for a
+            template, the template will be compiled as is.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill make</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   ├─ extra.mustache
+  |   ├─ wrapper.mustache
+  |   ├─ nested-with-wrapper
+  |   |   ├─ index.mustache
+  |   |   └─ wrapper.mustache
+  |   └─ nested-without-wrapper
+  |       └─ index.mustache
+  └─ dest
+      ├─ index.html
+      ├─ extra.html
+      ├─ nested-with-wrapper
+      |   └─ index.html
+      └─ nested-without-wrapper
+          └─ index.html
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/extra.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/extra.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/wrapper.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/wrapper.mustache</h1>
+
+  {[{> page}]}
+
+  <p>Footer from src/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-with-wrapper/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested-with-wrapper/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-with-wrapper/wrapper.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+
+  {[{> page}]}
+
+  <p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-without-wrapper/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested-without-wrapper/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/wrapper.mustache</h1>
+
+  <p>Content from src/index.mustache</p>
+
+  <p>Footer from src/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/extra.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/wrapper.mustache</h1>
+
+  <p>Content from src/extra.mustache</p>
+
+  <p>Footer from src/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/nested-with-wrapper/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/nested-with-wrapper/wrapper.mustache</h1>
+
+  <p>Content from src/nested-with-wrapper/index.mustache</p>
+
+  <p>Footer from src/nested-with-wrapper/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/nested-without-wrapper/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <h1>Header from src/wrapper.mustache</h1>
+
+  <p>Content from src/nested-without-wrapper/index.mustache</p>
+
+  <p>Footer from src/wrapper.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <div class="container">
+          <h3 id="partials">
+            <a class="docs-section-link" href="#partials">Partials</a>
+          </h3>
+          <p>
+            Partials are templates that can be included within other templates. In mustache, partial
+            tags are denoted by the greater-than symbol, eg.
+            <code>{[{#lambdas.escape}]}{[{> partial-name}]}{[{/lambdas.escape}]}</code>.  Millwright
+            will look for partials in the <code>src/partials</code> directory, using the filename
+            sans extension. For example,
+            <code>{[{#lambdas.escape}]}{[{> my-partial}]}{[{/lambdas.escape}]}</code> will yield the
+            contents of <code>src/partials/my-partial.mustache</code>.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill make</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   ├─ nested
+  |   |   └─ index.mustache
+  |   └─ partials
+  |       └─ content.mustache
+  └─ dest
+      ├─ index.html
+      └─ nested
+          └─ index.html
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/index.mustache</p>
+
+  {[{> content}]}
+  {[{/lambdas.escape}]}
+  </pre>
+                </div>
+
+                <h4>src/nested/index.mustache</h4>
+                <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested/index.mustache</p>
+
+  {[{> content}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/partials/content.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/partials/content.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/index.mustache</p>
+
+  <p>Content from src/partials/content.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/nested/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested/index.mustache</p>
+
+  <p>Content from src/partials/content.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <div class="container">
+          <h3 id="lambdas">
+            <a class="docs-section-link" href="#lambdas">Lambdas</a>
+          </h3>
+          <p>
+            Lambdas are JavaScript functions that you can write and use to implement custom
+            processing for parts of your template. Some templating languages call their version of
+            this "helpers".  Millwright looks for lambdas in the <code>src/lambdas</code> directory.
+            Unlike partials, lambdas don't have a special tag in mustache (instead the list tag
+            <code>{[{#lambdas.escape}]}{[{#...}]}{[{/...}]}{[{/lambdas.escape}]}</code> is used), so
+            the lambda file name must be prefixed with "lambdas", eg.
+            <code>{[{#lambdas.escape}]}
+              {[{#lambdas.my-lambda}]}...{[{/lambdas.my-lambda}]}
+            {[{/lambdas.escape}]}</code>.
+          </p>
+          <p> To allow maximum potential for this feature, each lambda is expected to be a node
+            module.  This means that lambdas can do anything that node modules can do, like
+            requiring other modules that you've installed to your project.
+          </p>
+          <p>
+            Note that lambda node modules must export an object containing a reference to
+            <code>module</code> itself, as well as the lambda function. This is because Millwright
+            will use your <code>module</code> reference to <code>require</code> your lambda, so that
+            modules required by your lambda are
+            resolved correctly.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill make</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   └─ lambdas
+  |       └─ escape.mustache
+  └─ dest
+      └─ index.html
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>
+    This paragraph is meant to be displayed as code, with tags included, so it
+    has to be html escaped.
+  </p>
+  {[{/lambdas.escape}]}
+  <pre>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/lambdas/escape.js</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  const escape = require('escape-html');
+
+  module.exports = {module: module, lambda: lambda};
+
+   pfunction lambda(template) {
+    return escape(template).trim();
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  &lt;p&gt;
+    This paragraph is meant to be displayed as code, with tags included, so it
+    has to be html escaped.
+  &lt;/p&gt;
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 id="assets">
+            <a class="docs-section-link" href="#assets">Assets</a>
+          </h2>
+
+          <p>
+            Millwright's asset handling currently includes JavaScript and CSS files only.
+          </p>
+          <p>
+            Configuring build tools to process these files typically takes the most time when
+            starting
+            a new project - Millwright is meant to give this time back to the developer by only
+            requiring paths to the assets. Everything else is handled without further input,
+            including transpiling, sourcemapping, and optimization for production builds.
+          <p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="including-assets">
+            <a class="docs-section-link" href="#including-assets">Including Assets</a>
+          </h3>
+
+          <p>
+            Millwright looks for asset paths in a project's <code>json</code> files, under the
+            reserved <code>assets</code> property. This property's value should be an object
+            composed of arrays of asset paths relative to the <code>json</code> file. As template
+            data goes, these assets will be available to templates just as expected, except the path
+            that is output for each asset will be absolute from site/app root in the
+            <code>dest</code> directory.
+          </p>
+          <p>
+            It helps to think of the asset values provided in template data (<code>json</code>)
+            files as simple variable values. The data structure in use is valid for mustache, and
+            the values are output just like any other template data value. Millwright simply siphons
+            information from these asset objects to determine what assets your project is using and
+            which templates require them.
+          </p>
+          <p>
+            Lastly, because assets objects are just like any other template data value, the assets
+            provided will be made available to templates just like data values. So assets provided
+            to a <code>wrapper</code> template will be used in all templates that use that wrapper.
+            Likewise, if assets are specified in the template data file of a specific template, eg.
+            <code>index.json</code>, then those assets will be loaded especially for that file.
+          </p>
+          <p>
+            The same asset can be specified for as many templates as necessary, and Millwright will
+            continue to improve how smart it is about reusing assets in production builds.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill make</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   ├─ extra.mustache
+  |   ├─ extra.json
+  |   ├─ wrapper.mustache
+  |   ├─ wrapper.json
+  |   ├─ styles.css
+  |   ├─ random-directory
+  |   |   └─ do-things.js
+  |   ├─ nested-with-wrapper
+  |   |   ├─ index.mustache
+  |   |   ├─ wrapper.mustache
+  |   |   ├─ wrapper.json
+  |   |   └─ more-styles.css
+  |   └─ nested-without-wrapper
+  |       ├─ index.mustache
+  |       └─ index.json
+  └─ dest
+      ├─ index.html
+      ├─ extra.html
+      ├─ styles.css
+      ├─ random-directory
+      |   └─ do-things.js
+      ├─ nested-with-wrapper
+      |   ├─ index.html
+      |   └─ more-styles.css
+      └─ nested-without-wrapper
+          └─ index.html
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/extra.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/extra.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/extra.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "styles": [
+        "../node_modules/module-with-styles/styles.css"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/wrapper.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {[{#assets.styles}]}
+    <link href="{[{.}]}" rel="stylesheet">
+  {[{/assets.styles}]}
+
+  {[{#assets.scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.scripts}]}
+
+  {[{> page}]}
+
+  {[{#assets.some-more-scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.some-more-scripts}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/wrapper.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "styles": [
+        "styles.css",
+      ],
+      "scripts": [
+        "../node_modules/some-module/script.js"
+      ],
+      "some-more-scripts": [
+        "../bower_components/some-package/another-script.js",
+        "random-directory/do-things.js"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-with-wrapper/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested-with-wrapper/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-with-wrapper/wrapper.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {[{#assets.random-name}]}
+    <link href="{[{.}]}" rel="stylesheet">
+  {[{/assets.random-name}]}
+
+  {[{> page}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-with-wrapper/wrapper.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "random-name": [
+        "more-styles.css"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/nested-without-wrapper/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/nested-without-wrapper/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="/styles.css" rel="stylesheet">
+
+  <script src="/some-module/script.js"></script>
+
+  <p>Content from src/index.mustache</p>
+
+  <script src="/some-package/another-script.js"></script>
+  <script src="/random-directory/do-things.js"></script>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/extra.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="/styles.css" rel="stylesheet">
+  <link href="/module-with-styles/styles.css" rel="stylesheet">
+
+  <script src="/some-module/script.js"></script>
+
+  <p>Content from src/extra.mustache</p>
+
+  <script src="/some-package/another-script.js"></script>
+  <script src="/random-directory/do-things.js"></script>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/nested-with-wrapper/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="awesome-styles.css" rel="stylesheet">
+
+  <p>Content from src/nested-with-wrapper/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/nested-without-wrapper/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="/styles.css" rel="stylesheet">
+
+  <script src="/some-module/script.js"></script>
+
+  <p>Content from src/nested-without-wrapper/index.mustache</p>
+
+  <script src="/some-package/another-script.js"></script>
+  <script src="/random-directory/do-things.js"></script>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="transpiling">
+            <a class="docs-section-link" href="#transpiling">Transpiling</a>
+          </h3>
+
+          <p>
+            Millwright can transpile code written in these JavaScript and CSS preprocessors
+            languages:
+          </p>
+
+          <ul>
+            <li><a href="https://babeljs.io/learn-es2015/">ES6/ES2015</a></li>
+            <li><a href="http://coffeescript.org/">CoffeeScript</a></li>
+            <li><a href="http://cssnext.io/">CSSNext</a></li>
+            <li><a href="http://sass-lang.com/">Sass</a></li>
+            <li><a href="http://lesscss.org/">Less</a></li>
+            <li><a href="http://stylus-lang.com/">Stylus</a></li>
+          </ul>
+
+          <p>
+            Using preprocessor files works the same as with standard js/css files, just provide a
+            path to the asset source in a template data file (see <a
+            href="#including-assets">Including Assets</a> for more info). Files can be named however
+            you like, Millwright only reads the file extension to determine type.
+          </p>
+
+          <p>
+            Note that Millwright always runs plain JavaScript and CSS files through the ES2015 and
+            CSSNext preprocessors, respectively. This may or may not be the best route, but results
+            have been great so far. Your feedback is appreciated via Github issues.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure</h4>
+              <div class="code-block">
+  <pre>
+  └─ src
+      ├─ index.mustache
+      ├─ index.json
+      ├─ some-es6.js
+      ├─ coffeescript.coffee
+      ├─ styles-in-cssnext.css
+      ├─ sass.scss
+      ├─ imports-work-too.scss
+      ├─ less.less
+      └─ stylus.styl
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {[{#assets.styles}]}
+    <link href="{[{.}]}" rel="stylesheet">
+  {[{/assets.styles}]}
+
+  {[{#assets.scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.scripts}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/index.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "scripts": [
+        "some-es6.js",
+        "coffeescript.coffee"
+      ],
+      "styles": [
+        "styles-in-cssnext.css",
+        "sass.scss",
+        "less.less",
+        "stylus.styl"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="url-assets">
+            <a class="docs-section-link" href="#url-assets">URL Assets</a>
+          </h3>
+
+          <p>
+            Assets that are fetched via URL can be used by providing the complete url (including
+            protocol) to a template data file.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure</h4>
+              <div class="code-block">
+  <pre>
+  └─ src
+      ├─ index.mustache
+      └─ index.json
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {[{#assets.scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.scripts}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/index.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "scripts": [
+        "https://unpkg.com/lodash@4.17.4"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              <div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="sourcemaps">
+            <a class="docs-section-link" href="#sourcemaps">Sourcemaps</a>
+          </h3>
+          <p>
+            Sourcemaps allow you to interact with your original source files in browser development
+            tools instead of the transpiled/minified/concatenated files that the browser is actually
+            using.
+          </p>
+          <p>
+            Millwright places both sourcemaps and source files in the <code>sourcemaps</code>
+            directory in your project's web root. You can set breakpoints in the JavaScript source
+            files there, and style rule references will automatically map to source files as well.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 id="local-development">
+            <a class="docs-section-link" href="#local-development">Local Development</a>
+          </h2>
+
+          <p>
+            Millwright currently provides two kinds of commands: development and production. The
+            development commands don't minify or concatenate your js/css, and provide file watching
+            when the local server is running, along with automatically injecting changed code or
+            reloading the page when appropriate.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="serving-locally">
+            <a class="docs-section-link" href="#serving-locally">Serving Locally</a>
+          </h3>
+          <p>
+            To serve files locally, you can run either the <code>mill dev</code> command, for a
+            non-optimized build, ideal for development or the <code class="command">mill
+            preview</code> command, which produces and serves a production build, generally for
+            testing purposes.
+          </p>
+          <p>
+            Millwright currently uses <a href="https://www.browsersync.io/">Browsersync</a> for
+            serving locally, but we're aware that some users may not be able to use it. Windows
+            users, specifically, could run into issues. We want to address this potential issue
+            based on developer feedback, so please open or comment on GitHub issues if serving
+            locally isn't working for you.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="watching-files">
+            <a class="docs-section-link" href="#watching-files">Watching Files</a>
+          </h3>
+          <p>
+            Millwright will watch everything in a project's <code>src</code> directory for changes.
+            In addition, files outside of source that are referenced as assets, such as node modules
+            and bower components, will be watched as individual files. When a file changes,
+            Millwright will re-run whatever portion of the build is necessary for the specific file
+            or files that changed.
+          </p>
+          <p>
+            After a watched file changes and the partial build process runs, any connected browsers
+            will be updated. If the changed file is a CSS or CSS preprocessor file, the any related
+            CSS files will be rebuilt and injected to the page, without requiring a reload. For any
+            other changes, the page will be reloaded.
+          <p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2 id="production-builds">
+            <a class="docs-section-link" href="#production-builds">Production Builds</a>
+          </h2>
+
+          <p>
+            Millwright provides production builds using the <code>mill build</code> command.
+            Currently, that includes minifying and concatenating assets, but Millwright can do much
+            more in the future with little or no changes to how you use it. Things like bundling and
+            tree shaking are on our radar.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="minification">
+            <a class="docs-section-link" href="#minification">Minification</a>
+          </h3>
+          <p>
+            JavaScript and CSS assets are minified individually when running <code>mill
+            build</code>.  If your file is already minified (ends with <code>.min.js</code> or
+            <code>.min.css</code>, Millwright won't attempt to minify it. If a minified file is
+            found in the same directory as your source file, which is often the case with node
+            modules or bower components, Millwright will just use that instead.
+          </p>
+          <p>
+            When minifying assets, Millwright will also provide sourcemaps, and previous sourcemaps
+            from any transpiling will be passed through as well. See
+            <a href="#sourcemaps">Sourcemaps</a> for more info.
+          <p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="concatenation">
+            <a class="docs-section-link" href="#concatenation">Concatenation</a>
+          </h3>
+          <p>
+            Concatenation is an optimization step where multiple files are combined into one so that
+            the browser makes less requests. For those who are able to use HTTP/2 for your project
+            and don't want concatenation, an option is expected for that soon.
+          </p>
+          <p>
+            When concatenating files, the resulting file is named based on the key used in the
+            relevant template data (<code>json</code>) file. For template data files that handle a
+            specific page, the page name is also used to avoid file naming collisions. If a page
+            uses a wrapper with assets, the wrapper assets and page specific assets will be provided
+            in separate files, so that the single wrapper script can be reused by all consumers.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure (after running <code>mill build</code>)</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  |   ├─ index.mustache
+  |   ├─ extra.mustache
+  |   ├─ extra.json
+  |   ├─ wrapper.mustache
+  |   ├─ wrapper.json
+  |   ├─ scripts.js
+  |   ├─ more-scripts.js
+  |   ├─ styles.css
+  |   ├─ more-styles.css
+  |   └─ random-directory
+  |       └─ do-things.js
+  └─ dest
+      ├─ index.html
+      ├─ extra.html
+      ├─ scripts.min.js
+      ├─ styles.min.css
+      ├─ extra-styles.min.css
+      └─ extra-scripts.min.js
+  </pre>
+              </div>
+
+              <h4>src/index.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/index.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/extra.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <p>Content from src/extra.mustache</p>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/extra.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "styles": [
+        "../node_modules/module-with-styles/styles.css"
+      ],
+      "scripts": [
+        "random-directory/do-things.js"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/wrapper.mustache</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {[{#assets.styles}]}
+    <link href="{[{.}]}" rel="stylesheet">
+  {[{/assets.styles}]}
+
+  {[{#assets.scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.scripts}]}
+
+  {[{> page}]}
+
+  {[{#assets.some-more-scripts}]}
+    <script src="{[{.}]}"></script>
+  {[{/assets.some-more-scripts}]}
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>src/wrapper.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "assets": {
+      "styles": [
+        "styles.css",
+        "more-styles.css
+      ],
+      "scripts": [
+        "../node_modules/some-module/script.js",
+        "scripts.js",
+        "more-scripts.js"
+      ],
+      "some-more-scripts": [
+        "../bower_components/some-package/another-script.js"
+      ]
+    }
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/index.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="/styles.min.css" rel="stylesheet">
+
+  <script src="/scripts.min.js"></script>
+
+  <p>Content from src/index.mustache</p>
+
+  <script src="/some-more-scripts.min.js"></script>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+
+              <h4>dest/extra.html</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  <link href="/styles.min.css" rel="stylesheet">
+  <link href="/extra-styles.min.css" rel="stylesheet">
+
+  <script src="/extra-scripts.min.js"></script>
+
+  <p>Content from src/extra.mustache</p>
+
+  <script src="/some-more-scripts.min.js"></script>
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <div class="container">
+          <h2 id="options">
+            <a class="docs-section-link" href="#options">Options</a>
+          </h2>
+          <p>
+            Millwright is designed to work without any tool configuration whatsoever, but if the
+            defaults don't work for some reason, options can be set via
+            <code>millwright.json</code>.  <strong>This is a completely optional file.</strong> It
+            should be added to the root of your project (alongside <code>package.json</code>) when
+            used.
+          </p>
+          <p>
+            Here are the available options:
+          </p>
+
+          <table>
+            <tr>
+              <th scope="col">Option</th>
+              <th scope="col">Default</th>
+              <th scope="col">Description</th>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>defaultCommand</code></th>
+              <td><code>'dev'</code></td>
+              <td>Command used when running <code>mill</code></td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>srcDir</code></th>
+              <td><code>'src'</code></td>
+              <td>Name of source directory</td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>destDir</code></th>
+              <td><code>'dest'</code></td>
+              <td>Name of output directory</td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>partialsDir</code></th>
+              <td><code>'partials'</code></td>
+              <td>Name of partials directory</td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>lambdasDir</code></th>
+              <td><code>'lambdas'</code></td>
+              <td>Name of lambdas directory</td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>assetIgnoredBasePaths</code></th>
+              <td>
+                <code>
+    <pre>
+    [
+      (srcDir),
+      'bower_components',
+      'node_modules'
+    ]
+    </pre>
+                  </code>
+                </td>
+              <td>
+                Path segments to remove when creating dest paths for assets
+                (eg. node_modules/lib/script.js -> dest/lib/script.js). Must be an array of strings.
+                Setting this option will replace the entire default array.
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row"><code>templateTags</code></th>
+              <td><code>{[{#lambdas.escape}]}['{[{', '}]}']{[{/lambdas.escape}]}</code></td>
+              <td>
+                Delimiter tags used in templates, must be an array of two strings, with the opening
+                and closing tags in order.
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure</h4>
+              <div class="code-block">
+  <pre>
+  ├─ src
+  └─ millwright.json
+  </pre>
+              </div>
+
+              <h4>src/millwright.json</h4>
+              <div class="code-block">
+  <pre>
+  {[{#lambdas.escape}]}
+  {
+    "defaultCommand": "dev",
+    "srcDir": "src",
+    "destDir": "dest",
+    "partialsDir": "partials",
+    "lambdasDir": "lambdas",
+    "assetIgnoredBasePaths: [
+      "src",
+      "bower_components",
+      "node_modules"
+    ],
+    templateTags: [
+      "{[{",
+      "}]}"
+    ]
+  }
+  {[{/lambdas.escape}]}
+  </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
   </section>
 
