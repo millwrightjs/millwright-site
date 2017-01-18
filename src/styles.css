@@ -462,8 +462,13 @@ header {
   }
 
   & p,
-  & ul {
+  & ul,
+  & ol {
     line-height: 2;
+  }
+
+  & ol li {
+    padding-top: 10px;
   }
 
   & .code-block {

@@ -83,6 +83,7 @@ function destroyStickies() {
 
 function activateSticky(elementObj) {
   elementObj.element.classList.add('js-sticky-active');
+  elementObj.element.scrollTop = 0;
   elementObj.stickyActive = true;
 }
 
