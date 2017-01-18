@@ -39,46 +39,26 @@ document.getElementById('docs').addEventListener('click', event => {
 
 // Sticky nav
 const stickyData = {};
+const responsiveBreakpoint = '(min-width: 860px)';
 let stickyElements = document.getElementsByClassName('js-sticky');
-var largeScreenMediaQuery = '(min-width: 700px)';
 
-responsiveInit();
+init();
+window.addEventListener('scroll', handleStickies);
+window.addEventListener('resize', init);
 
-window.addEventListener('resize', responsiveInit);
-
-function responsiveInit() {
-  var viewportIsLarge = window.matchMedia(largeScreenMediaQuery).matches;
-  if (viewportIsLarge && !stickyData.viewportWasLarge) {
-    initForLargeViewport();
-    stickyData.viewportWasLarge = true;
-    stickyData.initialized = true;
-  } else if (viewportIsLarge) {
-    destroyStickies();
-    initForLargeViewport();
-  } else if (!viewportIsLarge && (stickyData.viewportWasLarge || !stickyData.initialized)) {
-    teardownForLargeViewport();
-    stickyData.viewportWasLarge = false;
-    stickyData.initialized = true;
-  }
-}
-
-function initForLargeViewport() {
+function init() {
   stickyInit(stickyElements);
   handleStickies();
-  window.addEventListener('scroll', handleStickies);
-}
-
-function teardownForLargeViewport() {
-  window.removeEventListener('scroll', handleStickies);
-  destroyStickies();
 }
 
 function stickyInit(stickyElements) {
+  destroyStickies();
   stickyData.stickyElements = [];
   for (let i = 0; i < stickyElements.length; i++) {
     stickyData.stickyElements.push({
       element: stickyElements[i],
-      originalTop: stickyElements[i].getBoundingClientRect().top + window.pageYOffset
+      origTop: stickyElements[i].getBoundingClientRect().top + window.pageYOffset,
+      responsive: stickyElements[i].classList.contains('js-sticky-responsive')
     });
   }
 }
@@ -86,11 +66,11 @@ function stickyInit(stickyElements) {
 function handleStickies() {
   let top = window.pageYOffset;
 
-  stickyData.stickyElements.forEach(function (elementObj) {
-    if (!elementObj.stickyActive && top >= elementObj.originalTop) {
-      activateSticky(elementObj);
-    } else if (elementObj.stickyActive && top < elementObj.originalTop) {
-      deactivateSticky(elementObj);
+  stickyData.stickyElements.forEach(function (elObj) {
+    if (!elObj.stickyActive && (elObj.responsive ? responsiveMatch() : true) && top >= elObj.origTop) {
+      activateSticky(elObj);
+    } else if (elObj.stickyActive && top < elObj.origTop) {
+      deactivateSticky(elObj);
     }
   });
 }
@@ -109,6 +89,10 @@ function activateSticky(elementObj) {
 function deactivateSticky(elementObj) {
   elementObj.element.classList.remove('js-sticky-active');
   elementObj.stickyActive = false;
+}
+
+function responsiveMatch() {
+  return window.matchMedia(responsiveBreakpoint).matches;
 }
 
 

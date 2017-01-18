@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Millwright.js</title>
+  <title>millwright.js</title>
   <meta name="description" content="A zero configuration build tool for the web.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+    heap.load("1071874891");
+  </script>
 
   {[{#assets.styles}]}
     <link href="{[{.}]}" rel="stylesheet">
@@ -16,7 +21,7 @@
   <section class="announcement-bar">
     <div class="announcement announcement-loud">
       <p>
-        <strong>Millwright.js is currently in alpha.</strong>
+        <strong>millwright.js is currently in alpha.</strong>
         It is expected to work as described, but needs quite a lot of testing. Please use Millwright
         carefully during this phase.
         <a href="https://github.com/millwrightjs/millwright/issues">New issues on GitHub</a> are
@@ -33,8 +38,14 @@
       </p>
     </div>
   </section>
+  <nav class="main-nav js-sticky">
+    <a class="main-nav-link-home" href="#"><img class="main-nav-logo" src="/logo.svg"></a>
+    <a class="main-nav-link" href="#docs">docs</a>
+    <a class="main-nav-link" href="https://github.com/millwrightjs/millwright">GitHub</a>
+    <a class="main-nav-link" href="https://www.npmjs.com/package/millwright">npm</a>
+  </nav>
   <header class="container">
-    <h1 class="header-title">Millwright.js</h1>
+    <h1 class="header-title">millwright.js</h1>
     <p class="header-subtitle">A zero configuration build tool for the web.</p>
     <a class="button header-link" href="https://github.com/millwrightjs/millwright">GitHub</a>
     <a class="button header-link" href="https://www.npmjs.com/package/millwright">npm</a>
@@ -61,7 +72,7 @@
   </section>
   <section id="docs" class="docs">
 
-    <nav class="docs-nav js-sticky" aria-label="Documentation shortcuts">
+    <nav class="docs-nav js-sticky js-sticky-responsive" aria-label="Documentation shortcuts">
 
       <section class="docs-nav-section">
         <a href="#getting-started">Getting Started</a>
@@ -133,9 +144,10 @@
             per-project.
           </p>
           <p>
-            To install the global package, run <code>npm install millwright-cli -g</code>. Then,
-            from inside your project directory, install the local package by running
-            <code>npm install millwright --save-dev</code>.
+            To install the global package, run
+            <code class="wrap">npm install millwright-cli -g</code>. Then, from inside your project
+            directory, install the local package by running
+            <code class="wrap">npm install millwright --save-dev</code>.
           </p>
         </div>
       </section>
@@ -629,7 +641,7 @@
             will look for partials in the <code>src/partials</code> directory, using the filename
             sans extension. For example,
             <code>{[{#lambdas.escape}]}{[{> my-partial}]}{[{/lambdas.escape}]}</code> will yield the
-            contents of <code>src/partials/my-partial.mustache</code>.
+            contents of <code class="wrap">src/partials/my-partial.mustache</code>.
           </p>
         </div>
 
@@ -1743,6 +1755,7 @@ module.exports = {module: module, lambda: lambda};
 
 
   <footer class="container footer">
+    <a class="footer-sponsor-link" href="https://www.netlify.com"><img src="/netlify.svg"></a>
     <p>
       <span class="preserve-line">&copy; 2016-2017 Shawn Erquhart.</span>
       <span class="preserve-line">Released under the MIT license.</span>
