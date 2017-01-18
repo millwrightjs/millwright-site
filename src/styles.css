@@ -444,12 +444,10 @@ header {
   }
 
   & h3 {
-    padding-top: 30px;
-    margin-top: 30px;
+    padding-top: 60px;
 
     @media (--width-wide) {
-      padding-top: 40px;
-      margin-top: 40px;
+      padding-top: 80px;
     }
   }
 
