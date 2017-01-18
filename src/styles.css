@@ -55,10 +55,6 @@ a:visited {
   display: inline-block;
 }
 
-.wrap {
-  white-space: normal;
-}
-
 .nowrap {
   white-space: nowrap;
 }
@@ -129,7 +125,8 @@ pre {
 }
 
 code {
-  white-space: nowrap;
+  display: inline-block;
+  line-height: 1.2;
 }
 
 code,
