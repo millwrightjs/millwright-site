@@ -85,6 +85,7 @@
         <a href="#getting-started">Getting Started</a>
         <a href="#why-millwright">Why Millwright?</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#gotchas">Gotchas</a>
         <a href="#installation">Installation</a>
         <a href="#commands">Commands</a>
         <a href="#usage">Usage</a>
@@ -121,7 +122,9 @@
       </section>
 
       <section class="docs-nav-section">
+        <a href="#appendices">Appendices</a>
         <a href="#options">Options</a>
+        <a href="#using-with-other-tools">Using With Other Tools</a>
       </section>
 
     </nav>
@@ -155,29 +158,24 @@
             <a class="docs-section-link" href="#why-millwright">Why Millwright?</a>
           </h3>
           <p>
-            <strong>Because we're all doing the same stuff.</strong><br>
-            Many web projects share a common core of requirements for their build process, things
-            like transpiling ES6 and minifying assets. Millwright's goal is to fully automate that
-            core functionality, leading to a low input/high output exchange for projects with needs
-            that align with what Millwright can do.
+            <strong>Because many projects have the same needs.</strong><br>
+            A lot of web projects share a common core of requirements for their build process,
+            things like transpiling ES6 and minifying assets. Millwright's primary goal is to fully
+            automate that core functionality.
           </p>
           <p>
-            <strong>Because simplicity is awesome.</strong><br>
-            Most build tools center on their ability to do <em>everything</em>, generally via a
-            plugin architecture. The community then finds ways to automate the setup of these tools,
-            eg. Yeoman for Grunt. Millwright takes an inverse approach: it's made to work
-            autonomously and transparently <em>first</em>, with a plugin architecture likely to
-            follow for extensibility.
+            <strong>Because maintenance kills (time).</strong><br>
+            Hunting for build tool plugins takes time. Hunting for a good generator script takes
+            time. Making sure the plugins that you installed are still the right choice six months
+            down the road takes time. Making sure they're all up to date, and handling breaking
+            changes, takes time. Millwright seeks to resolve all of this by absorbing the question
+            of maintenance and dependency updates so that you only have to worry about updating one
+            library: Millwright itself.
           </p>
           <p>
-            <strong>Because standards are good for everyone.</strong><br>
-            Millwright requires some basic project structure, and while aspects of those
-            requirements can be changed via options, we don't make apologies for the requirements -
-            we consider them a feature. There's no such thing as a "Millwright project", only
-            projects that are compatible with Millwright. The difference is that we're intentional
-            about avoiding build tool lock in, so the standards we promote are simple, good
-            architecture, and may even improve some projects, making them more approachable for
-            onboarding developers.
+            <strong>Because it's easy.</strong><br>
+            New devs don't have to "learn Millwright". Experienced devs don't have to think about
+            the best way to run their builds. One command and done. You're going to love it.
           </p>
         </div>
       </section>
@@ -239,6 +237,33 @@
 
       <section>
         <div class="container">
+          <h3 id="gotchas">
+            <a class="docs-section-link" href="#gotchas">Gotchas</a>
+          </h3>
+          <p>
+            It's no fun to get knee deep into a new tool, only to find that it just won't work for
+            your use case. We want to help you avoid this, so here's some "gotchas" right up front.
+            We'll be adding to this list as new cases are discovered by the community.
+          </p>
+          <p>
+            <strong>You have to use mustache (for now).</strong>
+            Some kind of templating language has to be used so that Millwright can take the assets
+            you declare and get their paths into your html. Mustache is simple and agreeable, so we
+            started with that, but we expect to support many others soon (handlebars, ejs, dust,
+            etc).
+          </p>
+          <p>
+            <strong>It doesn't do what it doesn't do.</strong>
+            It doesn't cache your Angular templates. It doesn't server-side render your React app.
+            It doesn't help you run your tests. More of this kind of functionality is expected
+            moving forward, but we had to start somewhere. In the meantime, you still need
+            <a href="#using-with-other-tools">other tools</a> to handle whatever Millwright doesn't.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
           <h3 id="installation">
             <a class="docs-section-link" href="#installation">Installation</a>
           </h3>
@@ -263,7 +288,11 @@
           </h3>
           <p>
             Millwright currently utilizes a handful of commands centered around static site
-            generation:
+            generation.
+          </p>
+          <p>
+            <strong>Note:</strong> these commands must be used from the root of your project, in the
+            same directory as your <code>package.json</code>.
           </p>
           <p>
             <code>mill</code>
@@ -301,9 +330,14 @@
           <p>
             Millwright requires a <code>src</code> directory (name can be changed via
             <a href="#options">options</a>). By default, everything in the <code>src</code>
-            directory is simply copied to the <code>dest</code> directory (except for templates,
-            more on that soon). This means that simple sites or apps that don't use a build tool can
-            begin using Millwright incrementally.
+            directory is simply copied to the <code>dest</code> directory (except for
+            <a href="#templates">templates</a>, which Millwright will always attempt to process).
+            This means that simple sites or apps that don't use a build tool can begin using
+            Millwright incrementally.
+          </p>
+          <p>
+            The following sections explain how to structure your project to take full advantage of
+            Millwright.
           </p>
         </div>
 
@@ -1720,12 +1754,19 @@ module.exports = {module: module, lambda: lambda};
         </div>
       </section>
 
+      <section>
+        <div class="container">
+          <h2 id="appendices">
+            <a class="docs-section-link" href="#appendices">Appendices</a>
+          </h2>
+        </div>
+      </section>
 
       <section>
         <div class="container">
-          <h2 id="options">
+          <h3 id="options">
             <a class="docs-section-link" href="#options">Options</a>
-          </h2>
+          </h3>
           <p>
             Millwright is designed to work without any tool configuration whatsoever, but if the
             defaults don't work for some reason, options can be set via
@@ -1825,7 +1866,7 @@ module.exports = {module: module, lambda: lambda};
                 </div>
               </div>
 
-              <h4>src/millwright.json</h4>
+              <h4>millwright.json</h4>
               <div class="code-block-container">
                 <div class="code-block">
 <pre>
@@ -1845,6 +1886,58 @@ module.exports = {module: module, lambda: lambda};
     "{[{",
     "}]}"
   ]
+}
+{[{/lambdas.escape}]}
+</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h3 id="using-with-other-tools">
+            <a class="docs-section-link" href="#using-with-other-tools">Using With Other Tools</a>
+          </h3>
+          <p>
+            When you need functionality that Millwright doesn't offer, we recommend using
+            <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a> to link your build
+            commands together. In the simplified example below, we create an npm script that
+            combines <code>mill build</code> and a project's configured <code>grunt build</code>
+            into a single command <code>npm run build</code>.
+          </p>
+        </div>
+
+        <div class="docs-example">
+
+          <div class="container">
+            <button class="docs-example-toggle">Show example</button>
+          </div>
+
+          <div class="docs-example-content">
+            <div class="container">
+              <h4>file structure</h4>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+├─ src
+└─ package.json
+</pre>
+                </div>
+              </div>
+
+              <h4>package.json</h4>
+              <div class="code-block-container">
+                <div class="code-block">
+<pre>
+{[{#lambdas.escape}]}
+{
+  ...
+  "scripts": {
+    "build": "mill build && grunt build"
+  }
 }
 {[{/lambdas.escape}]}
 </pre>
