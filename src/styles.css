@@ -420,11 +420,13 @@ header {
 }
 
 .docs {
-  margin: 120px auto 0;
+  padding-top: 40px;
+  margin: 60px auto 0;
   position: relative;
   max-width: 2000px;
 
   @media (--width-wide) {
+    padding-top: 0;
     margin-top: 200px;
   }
 
