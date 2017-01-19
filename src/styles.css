@@ -632,10 +632,11 @@ td {
   text-align: left;
 }
 
-footer {
+footer,
+.footer {
   text-align: center;
   line-height: 2;
-  padding: 80px 0 40px;
+  padding: 20px 0;
 }
 
 .footer-sponsor-link {
