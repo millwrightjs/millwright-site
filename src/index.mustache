@@ -953,7 +953,7 @@ const escape = require('escape-html');
 
 module.exports = {module: module, lambda: lambda};
 
- pfunction lambda(template) {
+function lambda(template) {
   return escape(template).trim();
 }
 {[{/lambdas.escape}]}
@@ -1295,7 +1295,7 @@ module.exports = {module: module, lambda: lambda};
           </h3>
 
           <p>
-            Millwright can transpile code written in these JavaScript and CSS preprocessors
+            Millwright can transpile code written in these JavaScript and CSS preprocessor
             languages:
           </p>
 
