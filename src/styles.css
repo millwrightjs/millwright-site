@@ -218,6 +218,21 @@ code,
   }
 }
 
+.main-nav-logo-twitter {
+  width: 16px;
+  position: relative;
+  top: 1px;
+
+  @media (--width-narrow) {
+    width: 20px;
+    top: 2px;
+  }
+
+  @media (--width-wide) {
+    width: 22px;
+  }
+}
+
 .main-nav-link-home {
   float: left;
 }
