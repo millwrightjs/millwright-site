@@ -456,27 +456,23 @@ header {
     border-top: 4px solid #000;
 
     @media (--width-narrow) {
-      padding-top: 100px;
-      margin-top: 100px;
-    }
-
-    @media (--width-standard) {
-      padding-top: 120px;
+      padding-top: 80px;
       margin-top: 120px;
     }
 
-    @media (--width-wide) {
-      padding-top: 160px;
+    @media (--width-standard) {
+      padding-top: 80px;
       margin-top: 160px;
+    }
+
+    @media (--width-wide) {
+      padding-top: 80px;
+      margin-top: 240px;
     }
   }
 
   & h3 {
-    padding-top: 40px;
-
-    @media (--width-wide) {
-      padding-top: 80px;
-    }
+    padding-top: 80px;
   }
 
   & h4 {
@@ -665,13 +661,8 @@ footer,
   text-align: center;
   line-height: 2;
   padding: 20px 0;
-}
 
-.footer-sponsor-link {
-  padding: 40px;
-
-  & img {
-    display: inline-block;
-    width: 160px;
+  & a {
+    font-weight: normal;
   }
 }
