@@ -51,7 +51,7 @@
   </nav>
   <header class="container">
     <h1 class="header-title">millwright.js</h1>
-    <p class="header-subtitle">A zero configuration build tool for the web.</p>
+    <p class="header-subtitle">The easiest build tool you'll ever use.</p>
     <a class="button header-link" href="https://github.com/millwrightjs/millwright">GitHub</a>
     <a class="button header-link" href="https://www.npmjs.com/package/millwright">npm</a>
   </header>
@@ -63,30 +63,26 @@
     </div>
   </section>
   <section class="container project-description">
-    <h1>Stop configuring your build tool and start writing code.</h1>
+    <h1>Start projects faster.</h1>
     <p>
-      What if your build process just worked on it's own? No initialization, configuration, paths,
-      or globs. Just npm install and a build command. And what if the tool kept growing, so that
-      output is steadily more performant, build dependencies are up to date, and new
-      capabilities keep coming? Eventually we could all stop thinking about our build tooling and
-      focus on making things instead.
+      A lot of web projects need the same things. Millwright does those things automatically.
+      Template processing, asset transpiling, sourcemaps, local serving with file watching, and
+      production builds, all with one command and no config. You can head straight for the
+      <a href="#docs">docs</a>, read more about <a href="#how-it-works">how it works</a>, or just
+      <a href="#try-it-out">try it out</a> on your machine.
     </p>
-    <p>
-      <strong>We're starting with static site generation.</strong> It transpiles pre-processor and
-      future syntax code. It does sourcemaps. It serves your project locally with file watching and
-      auto-inject/reload. It produces optimized builds. All without writing any configuration code.
-    </p>
-    <p>Keep scrolling to get started!</p>
+    <a class="button header-link header-link-single" href="#try-it-out">Try it now</a>
   </section>
   <section id="docs" class="docs">
 
     <nav class="docs-nav js-sticky js-sticky-responsive" aria-label="Documentation shortcuts">
 
       <section class="docs-nav-section">
+        <a href="#try-it-out">Try it out</a>
+      </section>
+
+      <section class="docs-nav-section">
         <a href="#getting-started">Getting Started</a>
-        <a href="#why-millwright">Why Millwright?</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#gotchas">Gotchas</a>
         <a href="#installation">Installation</a>
         <a href="#commands">Commands</a>
         <a href="#usage">Usage</a>
@@ -134,132 +130,46 @@
 
       <section>
         <div class="container">
-          <h2 id="getting-started">
-            <a class="docs-section-link" href="#getting-started">Getting started</a>
+          <h2 id="try-it-out">
+            <a class="docs-section-link" href="#try-it-out">Try It Out</a>
           </h2>
           <p>
-            Getting started with Millwright requires two things: installing a couple of packages,
-            and having your project's file structure set up according to some very basic standards.
-            Your project may already have some of these bits in place, such as having a
-            <code>src</code> directory for all of your source code. The rest of the documentation
-            covers this in detail.
-          </p>
-          <p>
-            Note: This guide assumes that you know how to install and save npm packages to your
-            project.  If that's not you, we recommend checking out
-            <a href="https://docs.npmjs.com/getting-started/what-is-npm">their docs</a>
-            to get going.
+            The fastest possible way to understand Millwright is to play with some code. Just go
+            <a href="#installation">install it</a> in a new directory, and then run the
+            <code>mill demo</code> command to generate a small example project.
           </p>
         </div>
       </section>
 
       <section>
         <div class="container">
-          <h3 id="why-millwright">
-            <a class="docs-section-link" href="#why-millwright">Why Millwright?</a>
-          </h3>
+          <h2 id="getting-started">
+            <a class="docs-section-link" href="#getting-started">Getting Started</a>
+          </h2>
           <p>
-            <strong>Because many projects have the same needs.</strong><br>
-            A lot of web projects share a common core of requirements for their build process,
-            things like transpiling ES6 and minifying assets. Millwright's primary goal is to fully
-            automate that core functionality.
+            Setting up your project to use Millwright is very simple:
           </p>
-          <p>
-            <strong>Because maintenance kills (time).</strong><br>
-            Hunting for build tool plugins takes time. Hunting for a good generator script takes
-            time. Making sure the plugins that you installed are still the right choice six months
-            down the road takes time. Making sure they're all up to date, and handling breaking
-            changes, takes time. Millwright seeks to resolve all of this by absorbing the question
-            of maintenance and dependency updates so that you only have to worry about updating one
-            library: Millwright itself.
-          </p>
-          <p>
-            <strong>Because it's easy.</strong><br>
-            New devs don't have to "learn Millwright". Experienced devs don't have to think about
-            the best way to run their builds. One command and done. You're going to love it.
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <div class="container">
-          <h3 id="how-it-works">
-            <a class="docs-section-link" href="#how-it-works">How It Works</a>
-          </h3>
-          <p>
-            Here's a quick run-through of how Millwright works:
-          </p>
-          <ol>
-            <li>Run a <a href="#commands">command</a>, such as <code>mill make</code>.</li>
+          <ul class="list-spaced">
             <li>
-              Millwright walks your <code>src</code> directory and finds all of your templates
-              (currently just mustache).
+              Keep your project source code in a <code>src</code> directory at the project root.
             </li>
             <li>
-              Millwright then looks for <a href="#wrappers">wrappers</a> (typically a combined
-              header/footer file) and template data files (<code>json</code> files with the same
-              name as a template or wrapper).
+              Use mustache templates instead of html (change the extension from <code>html</code> to
+              <code>mustache</code>).
             </li>
             <li>
-              The template data files contain <a href="#template-variables">normal template data</a>
-              (if needed), but may also contain paths to <a href="#assets">assets</a>.
+              Structure your <code>src</code> directory the way that you want your site structured.
+              For example, if a page should be found at <code>my-project.com/a/b/c.html</code>,
+              then the template for that page should be in <code>src/a/b/c.mustache</code>.
             </li>
             <li>
-              Asset paths found in template data files are used to locate assets for processing,
-              including transpililing and sourcemapping. If a build command is used, minification
-              and concatenation also take place.
+              Use a <a href="#wrappers">wrapper</a> if you have more than one page sharing a
+              header and/or footer.
             </li>
             <li>
-              Templates are compiled, using a wrapper if it exists.
+              Declare your js and css <a href="#including-assets">assets</a>.
             </li>
-            <li>
-              Everything is output to the <code>dest</code> directory. For files that were
-              processed (transpiled, etc), the processed version is output. Non-processed files are
-              simply copied.
-            </li>
-            <li>
-              The resulting directory structure in <code>dest</code> is the same as whatever
-              structure was found in <code>src</code>.
-            </li>
-            <li>
-              If the <code>mill dev</code> command was used, then a local server is started, the
-              page is opened in the default browser, and Millwright begins watching all relevant
-              files.
-            </li>
-            <li>
-              If a file is added, removed, or changed, Millwright will try to do the minimal amount
-              of work necessary to update the project. With a css change for example, Millwright can
-              re-process any related files (if it's an import, for example), and inject the changes
-              without reloading.
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section>
-        <div class="container">
-          <h3 id="gotchas">
-            <a class="docs-section-link" href="#gotchas">Gotchas</a>
-          </h3>
-          <p>
-            It's no fun to get knee deep into a new tool, only to find that it just won't work for
-            your use case. We want to help you avoid this, so here's some "gotchas" right up front.
-            We'll be adding to this list as new cases are discovered by the community.
-          </p>
-          <p>
-            <strong>You have to use mustache (for now).</strong>
-            Some kind of templating language has to be used so that Millwright can take the assets
-            you declare and get their paths into your html. Mustache is simple and agreeable, so we
-            started with that, but we expect to support many others soon (handlebars, ejs, dust,
-            etc).
-          </p>
-          <p>
-            <strong>It doesn't do what it doesn't do.</strong>
-            It doesn't cache your Angular templates. It doesn't server-side render your React app.
-            It doesn't help you run your tests. More of this kind of functionality is expected
-            moving forward, but we had to start somewhere. In the meantime, you still need
-            <a href="#using-with-other-tools">other tools</a> to handle whatever Millwright doesn't.
-          </p>
+          </ul>
         </div>
       </section>
 
@@ -268,6 +178,12 @@
           <h3 id="installation">
             <a class="docs-section-link" href="#installation">Installation</a>
           </h3>
+          <p>
+            Note: This guide assumes that you know how to install and save npm packages to your
+            project.  If that's not you, we recommend checking out
+            <a href="https://docs.npmjs.com/getting-started/what-is-npm">their docs</a>
+            to get going.
+          </p>
           <p>
             Millwright requires two packages - a global package, which allows you to use the
             <code>mill</code> command, and a local package, which is installed
@@ -314,6 +230,10 @@
           <p>
             <code>mill preview</code>
             - same as <code>mill build</code>, but serves locally. Does not watch for changes.
+          </p>
+          <p>
+            <code>mill demo</code>
+            - generate an example project
           </p>
         </div>
       </section>
