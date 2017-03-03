@@ -5,7 +5,7 @@
       "styles.css"
     ],
     "scripts": [
-      "https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js",
+      "../node_modules/masonry-layout/dist/masonry.pkgd.js",
       "../node_modules/element-closest/element-closest.js",
       "scripts.js"
     ]

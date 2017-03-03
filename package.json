@@ -6,10 +6,11 @@
   "license": "MIT",
   "dependencies": {
     "element-closest": "^2.0.2",
-    "escape-html": "^1.0.3"
+    "escape-html": "^1.0.3",
+    "masonry-layout": "^4.1.1"
   },
   "devDependencies": {
-    "millwright": "^0.3.8",
+    "millwright": "^0.4.3",
     "millwright-cli": "^0.3.0"
   }
 }
